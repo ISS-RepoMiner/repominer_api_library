@@ -3,7 +3,7 @@ require_relative './spec_helper.rb'
 
 describe 'Bestgems_api_call specifications' do
   before do
-    VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
+    VCR.insert_cassette BESTGEMS_CASSETTE_FILE, record: :new_episodes
   end
 
   after do

@@ -10,7 +10,8 @@ FIXTURES_FOLDER = 'fixtures'
 CASSETTES_FOLDER = "#{FIXTURES_FOLDER}/cassettes"
 # Need to Fix
 #===
-CASSETTE_FILE = 'github_api'
+GITHUB_CASSETTE_FILE = 'github_api'
+BESTGEMS_CASSETTE_FILE = 'bestgems_api'
 RESULT_FILE = "#{CASSETTES_FOLDER}/github_api_results.yml"
 #===
 if File.file?('../config/credentials.yml')
