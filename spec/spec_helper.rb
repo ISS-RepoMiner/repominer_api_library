@@ -12,6 +12,7 @@ CASSETTES_FOLDER = "#{FIXTURES_FOLDER}/cassettes"
 #===
 GITHUB_CASSETTE_FILE = 'github_api'
 BESTGEMS_CASSETTE_FILE = 'bestgems_api'
+RUBYGEMS_CASSETTE_FILE = 'rubygems_api'
 RESULT_FILE = "#{CASSETTES_FOLDER}/github_api_results.yml"
 #===
 if File.file?('../config/credentials.yml')
