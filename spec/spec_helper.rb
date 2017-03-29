@@ -21,6 +21,7 @@ if File.file?('../config/credentials.yml')
   ENV['ACCESS_TOKEN'] = CREDENTIALS[:ACCESS_TOKEN]
   time = Time.now - 60 * 60 * 24 * 30 * 2
   ENV['UPDATE_TIME'] = time.to_time.iso8601
+  ENV['GEM_NAME'] = CREDENTIALS[:GEM_NAME]
 end
 
 
