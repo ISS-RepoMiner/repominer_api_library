@@ -11,14 +11,6 @@ module ApiCall
       @access_token = access_token
     end
 
-    def get_call(url)
-      HTTP.get(url, headers: { 'User-Agent' => @user_agent })
-    end
-
-    def merge_url(url)
-      @github_base_url + url + "access_token=#{@access_token}"
-    end
-
     def update(update_time)
       @update_time = update_time
     end
@@ -78,10 +70,20 @@ module ApiCall
       call_api_pages(api_endpoint, req_params)
     end
 
+    private
+
+    def get_call(url)
+      HTTP.get(url, headers: { 'User-Agent' => @user_agent })
+    end
+
+    def merge_url(url)
+      @github_base_url + url + "access_token=#{@access_token}"
+    end
+
     def call_api_pages(api_endpoint, req_params)
       fetch_hist = []
       req_params[:page] = 1
-      until false
+      loop do
         api_call_url = generate_api_url(api_endpoint, req_params)
         fetch = get_call(api_call_url)
         break if no_more_pages(fetch)
