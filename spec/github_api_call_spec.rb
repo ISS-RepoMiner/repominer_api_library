@@ -1,10 +1,13 @@
 # frozen_string_literal: true
+
 require_relative './spec_helper.rb'
 
 describe 'Github_api_call specifications' do
   before do
     VCR.insert_cassette GITHUB_CASSETTE_FILE, record: :new_episodes
     @object = ApiCall::GithubApiCall.new(ENV['REPO_USER'], ENV['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
+    @object_all = ApiCall::GithubApiCall.new(ENV['REPO_USER'], ENV['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
+    @object_update = ApiCall::GithubApiCall.new(ENV['REPO_USER'], ENV['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
   end
 
   after do
@@ -41,11 +44,9 @@ describe 'Github_api_call specifications' do
   end
 
   it 'should get less row from commits_history when using update' do
-    object_all = ApiCall::GithubApiCall.new(ENV['REPO_USER'], ENV['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
-    object_update = ApiCall::GithubApiCall.new(ENV['REPO_USER'], ENV['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
-    object_update.update(ENV['UPDATE_TIME'])
-    all_commit = object_all.commits_history
-    update_commit = object_update.commits_history
+    @object_update.update(ENV['UPDATE_TIME'])
+    all_commit = @object_all.commits_history
+    update_commit = @object_update.commits_history
     all_count = 0
     update_count = 0
     all_commit.each { |i| all_count += i.parse.count }
@@ -54,11 +55,9 @@ describe 'Github_api_call specifications' do
   end
 
   it 'should get less row from issue when using update' do
-    object_all = ApiCall::GithubApiCall.new(ENV['REPO_USER'], ENV['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
-    object_update = ApiCall::GithubApiCall.new(ENV['REPO_USER'], ENV['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
-    object_update.update(ENV['UPDATE_TIME'])
-    all_commit = object_all.issues
-    update_commit = object_update.issues
+    @object_update.update(ENV['UPDATE_TIME'])
+    all_commit = @object_all.issues
+    update_commit = @object_update.issues
     all_count = 0
     update_count = 0
     all_commit.each { |i| all_count += i.parse.count }

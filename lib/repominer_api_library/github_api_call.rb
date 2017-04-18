@@ -9,6 +9,7 @@ module ApiCall
       @github_base_url = [url, @repo_user, @repo_name].join('/')
       @user_agent = user_agent
       @access_token = access_token
+      @update_time = nil
     end
 
     def update(update_time)

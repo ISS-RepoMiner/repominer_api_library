@@ -3,18 +3,19 @@ require 'minitest/autorun'
 require 'yaml'
 require 'vcr'
 require 'webmock'
+require 'time'
 
-require_relative '../lib/api_library.rb'
+require_relative '../lib/repominer_api_library.rb'
 
 FIXTURES_FOLDER = 'fixtures'
-CASSETTES_FOLDER = "#{FIXTURES_FOLDER}/cassettes"
+CASSETTES_FOLDER = "spec/#{FIXTURES_FOLDER}/cassettes"
 GITHUB_CASSETTE_FILE = 'github_api'
 BESTGEMS_CASSETTE_FILE = 'bestgems_api'
 RUBYGEMS_CASSETTE_FILE = 'rubygems_api'
 RESULT_FILE = "#{CASSETTES_FOLDER}/github_api_results.yml"
 
-if File.file?('../config/credentials.yml')
-  CREDENTIALS = YAML.load(File.read('../config/credentials.yml'))
+if File.file?('./config/credentials.yml')
+  CREDENTIALS = YAML.load(File.read('./config/credentials.yml'))
   ENV['REPO_USER'] = CREDENTIALS[:REPO_USER]
   ENV['REPO_NAME'] = CREDENTIALS[:REPO_NAME]
   ENV['USER_AGENT'] = CREDENTIALS[:USER_AGENT]

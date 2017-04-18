@@ -35,10 +35,11 @@ http_interactions:
       - 1; mode=block
       X-Content-Type-Options:
       - nosniff
-      Content-Security-Policy-Report-Only:
+      Content-Security-Policy:
       - default-src 'self'; script-src 'self' https://secure.gaug.es; style-src 'self'
-        https://fonts.googleapis.com; img-src 'self' https://secure.gaug.es https://gravatar.com;
-        font-src https://fonts.gstatic.com; connect-src https://s3-us-west-2.amazonaws.com/rubygems-dumps/;
+        https://fonts.googleapis.com; img-src 'self' https://secure.gaug.es https://gravatar.com
+        https://secure.gravatar.com; font-src 'self' https://fonts.gstatic.com; connect-src
+        https://s3-us-west-2.amazonaws.com/rubygems-dumps/; frame-src https://ghbtns.com
       Etag:
       - '"7f89285f8aa2a951c2a53f73d1589b71"'
       Last-Modified:
@@ -46,9 +47,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, public
       X-Request-Id:
-      - 7bbe21e7-fb0e-4893-ab8a-3ee70d5d1b37
+      - 5c037c6e-12df-4ed0-a14a-23c2b00ef2f9
       X-Runtime:
-      - '0.012340'
+      - '0.009791'
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       X-Backend:
@@ -58,7 +59,7 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Wed, 29 Mar 2017 05:27:21 GMT
+      - Tue, 18 Apr 2017 03:05:16 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -66,13 +67,13 @@ http_interactions:
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-itm7423-ITM
+      - cache-itm7420-ITM
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1490765241.754102,VS0,VE137
+      - S1492484716.336591,VS0,VE135
       Vary:
       - Accept-Encoding,Fastly-SSL
       Server:
@@ -80,21 +81,21 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"authors":"Leo Lee","built_at":"2017-01-07T00:00:00.000Z","created_at":"2017-01-07T14:00:30.682Z","description":"Get
-        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":261,"metadata":{},"number":"0.1.4","summary":"Get
+        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":295,"metadata":{},"number":"0.1.4","summary":"Get
         foods nutrients by search it name","platform":"ruby","rubygems_version":"\u003e=
         0","ruby_version":"\u003e= 0","prerelease":false,"licenses":["MIT"],"requirements":[],"sha":"029a53fa1fe879da4a523792f73729a93b34d33cd3a942aed6d2f691c87d69c5"},{"authors":"Leo
         Lee","built_at":"2017-01-06T00:00:00.000Z","created_at":"2017-01-06T05:42:58.810Z","description":"Get
-        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":205,"metadata":{},"number":"0.1.3","summary":"Get
+        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":223,"metadata":{},"number":"0.1.3","summary":"Get
         foods nutrients by search it name","platform":"ruby","rubygems_version":"\u003e=
         0","ruby_version":"\u003e= 0","prerelease":false,"licenses":["MIT"],"requirements":[],"sha":"3730dbaeb584f476560b8a639bcaf4e292873574e242d87912746e0876056ca5"},{"authors":"Leo
         Lee","built_at":"2016-12-11T00:00:00.000Z","created_at":"2016-12-11T09:07:27.312Z","description":"Get
-        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":249,"metadata":{},"number":"0.1.1","summary":"Get
+        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":266,"metadata":{},"number":"0.1.1","summary":"Get
         foods nutrients by search it name","platform":"ruby","rubygems_version":"\u003e=
         0","ruby_version":"\u003e= 0","prerelease":false,"licenses":["MIT"],"requirements":[],"sha":"46fe19faa9fe56a093de500542d5cbfe14b7a0fe02132fb353dd7f03b76c7c97"},{"authors":"Leo
         Lee","built_at":"2016-12-04T00:00:00.000Z","created_at":"2016-12-04T17:11:55.167Z","description":"Get
-        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":233,"metadata":{},"number":"0.1.0","summary":"Get
+        name, search time, unit, qty, weight, nutrients, calories, photo","downloads_count":250,"metadata":{},"number":"0.1.0","summary":"Get
         foods nutrients by search it name","platform":"ruby","rubygems_version":"\u003e=
         0","ruby_version":"\u003e= 0","prerelease":false,"licenses":["MIT"],"requirements":[],"sha":"00f6d99e984ef6bf74e5b8e45008f98601e4abcad3be9d3ed2a96ad9f8f82bf2"}]'
     http_version: 
-  recorded_at: Wed, 29 Mar 2017 05:27:21 GMT
+  recorded_at: Tue, 18 Apr 2017 03:05:18 GMT
 recorded_with: VCR 3.0.3
