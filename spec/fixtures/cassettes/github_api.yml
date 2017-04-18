@@ -2088,4 +2088,596 @@ http_interactions:
       string: "[]"
     http_version: 
   recorded_at: Tue, 18 Apr 2017 03:15:10 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/commits?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-17T12:28:27%2008:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 04:28:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4999'
+      X-Ratelimit-Reset:
+      - '1492493311'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 9e60649f02cd840ee8baa9960690f79f
+      X-Github-Request-Id:
+      - E3FB:173A:3D02803:4D696A9:58F595EF
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 04:28:32 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/issues?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-17T12:28:27%2008:00&state=all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 04:28:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4998'
+      X-Ratelimit-Reset:
+      - '1492493311'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 4537b68c46a1b65b106078b0a2578ee2
+      X-Github-Request-Id:
+      - E3FC:173A:3D028A1:4D69773:58F595F0
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 04:28:33 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/issues?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-17T12:28:40%2008:00&state=all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 04:28:42 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4997'
+      X-Ratelimit-Reset:
+      - '1492493311'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 1e9204dbc0447a6f39c3b3c44d87b3f8
+      X-Github-Request-Id:
+      - E3FD:173B:2744805:31BD8D4:58F595F9
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 04:28:42 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/commits?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-17T12:28:40%2008:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 04:28:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4996'
+      X-Ratelimit-Reset:
+      - '1492493311'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 2d7a5e35115884240089368322196939
+      X-Github-Request-Id:
+      - E3FE:173C:3B64422:4B1E1B7:58F595FA
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 04:28:43 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/commits?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-17T21:42:38%2008:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 13:42:40 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4999'
+      X-Ratelimit-Reset:
+      - '1492526560'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 5aeb3f30c9e3ef6ef7bcbcddfd9a68f7
+      X-Github-Request-Id:
+      - EDD7:173A:432C28E:556A074:58F617D0
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 13:42:41 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/issues?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-17T21:42:38%2008:00&state=all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 13:42:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4998'
+      X-Ratelimit-Reset:
+      - '1492526560'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - b535085e7f4d6e3423e016e684de0829
+      X-Github-Request-Id:
+      - EDD9:173A:432C5BE:556A4B5:58F617D5
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 13:42:46 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/commits?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-18T00:16:37%2008:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 16:16:38 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4999'
+      X-Ratelimit-Reset:
+      - '1492535798'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - eef8b8685a106934dcbb4b7c59fba0bf
+      X-Github-Request-Id:
+      - FA3A:1739:166D89F:1C90E0E:58F63BE6
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 16:16:38 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/NoBetterThan97/Worldca-api/issues?access_token=<ACCESS_TOKEN>&page=1&since=2017-02-18T00:16:37%2008:00&state=all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Leoli0320
+      Connection:
+      - close
+      Host:
+      - api.github.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Apr 2017 16:16:40 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4998'
+      X-Ratelimit-Reset:
+      - '1492535798'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"d751713988987e9331980363e24189ce"'
+      X-Oauth-Scopes:
+      - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
+        delete_repo, gist, notifications, repo, user
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 88531cdcf1929112ec480e1806d44a33
+      X-Github-Request-Id:
+      - FA3C:173A:44F43AB:57C5922:58F63BE7
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Tue, 18 Apr 2017 16:16:40 GMT
 recorded_with: VCR 3.0.3
