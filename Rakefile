@@ -42,7 +42,8 @@ namespace :etl do
     #sh 'kiba etl_step/100_get_raw_responses/105_get_raw_responses_commits_history/get_raw_responses_commits_history.etl'
     #sh 'kiba etl_step/100_get_raw_responses/106_get_raw_responses_issues/get_raw_responses_issues.etl'
     #sh 'kiba etl_step/100_get_raw_responses/107_get_raw_responses_total_download_trend/get_raw_responses_total_download_trend.etl'
-    sh 'kiba etl_step/100_get_raw_responses/108_get_raw_responses_daily_download_trend/get_raw_responses_daily_download_trend.etl'
-    sh 'kiba etl_step/100_get_raw_responses/109_get_raw_responses_version_downloads/get_raw_responses_version_downloads.etl'
+    #sh 'kiba etl_step/100_get_raw_responses/108_get_raw_responses_daily_download_trend/get_raw_responses_daily_download_trend.etl'
+    #sh 'kiba etl_step/100_get_raw_responses/109_get_raw_responses_version_downloads/get_raw_responses_version_downloads.etl'
+    sh 'kiba etl_steps/100_get_raw_responses_1/get_raw_responses.etl'
   end
 end

@@ -1,0 +1,16 @@
+require_relative "helpers/init.rb"
+
+#ConfigEnv.path_to_config("#{Dir.getwd}/config/config_env.rb")
+
+db = ConnectToDB.call
+
+list_of_gem = CreateRepoList.call
+
+source CallApi, list_of_gem
+
+destination SaveRecordToDB, db, 'raw_responses'
+
+post_process do
+  results = CountProcessedRecords.call(db, 'raw_responses')
+  puts "Total processed records: #{results}."
+end
