@@ -1,2 +1,3 @@
 /config/credentials.yml
 Gemfile.lock
+/db/repominer_etl.db

@@ -14,6 +14,10 @@ module ApiCall
       HTTP.get(api_endpoint)
     end
 
+    def url(route)
+      [@best_gem_base_api_url, "#{route}.json"].join('/')
+    end
+
     # get the commit activity in last year
     def daily_download_trend
       api_endpoint = [@best_gem_base_api_url, 'daily_downloads.json'].join('/')
