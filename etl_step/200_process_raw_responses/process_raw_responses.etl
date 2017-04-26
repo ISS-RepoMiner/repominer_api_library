@@ -1,0 +1,17 @@
+require_relative "helpers/init.rb"
+
+raw_db = ConnectToDB.call('raw_responses')
+relational_db = ConnectToDB.call('relational_dataset')
+
+source ReadRecordsFromDB, raw_db, 'raw_responses'
+
+
+
+transform ProcessRawResponses
+
+destination SaveRecordToDB, relational_db, 'relational_dataset'
+
+post_process do
+  results = CountProcessedRecords.call(relational_db, 'relational_dataset')
+  puts "Total processed records: #{results}."
+end

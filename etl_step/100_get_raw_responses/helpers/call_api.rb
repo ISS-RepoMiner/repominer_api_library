@@ -91,6 +91,6 @@ class CallApi
   end
 
   def rubygems_call(object)
-    { 'version_downloads_response' => object.version_downloads.to_s }
+    { 'version_downloads_response' => object.version_downloads.to_json }
   end
 end

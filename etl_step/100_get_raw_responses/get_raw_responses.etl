@@ -2,7 +2,7 @@ require_relative "helpers/init.rb"
 
 #ConfigEnv.path_to_config("#{Dir.getwd}/config/config_env.rb")
 
-db = ConnectToDB.call
+db = ConnectToDB.call('raw_responses')
 
 list_of_gem = CreateRepoList.call
 
