@@ -18,17 +18,17 @@ namespace :db do
     require 'sequel'
     require_relative 'db/services/connect_to_db'
     Sequel.extension :migration
-    db = ConnectToDB.call
-    Sequel::Migrator.run(db, 'db/migrations')
+    api_responses_db = ConnectToDB.call('api_responses')
+    Sequel::Migrator.run(api_responses_db, 'db/migrations')
   end
   desc 'Reset migrations (full rollback and migration)'
   task :reset do
     require 'sequel'
     require_relative 'db/services/connect_to_db'
     Sequel.extension :migration
-    db = ConnectToDB.call
-    Sequel::Migrator.run(db, 'db/migrations', target: 0)
-    Sequel::Migrator.run(db, 'db/migrations')
+    api_responses_db = ConnectToDB.call('api_responses')
+    Sequel::Migrator.run(api_responses_db, 'db/migrations', target: 0)
+    Sequel::Migrator.run(api_responses_db, 'db/migrations')
   end
 end
 
