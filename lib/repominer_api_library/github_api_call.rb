@@ -84,7 +84,7 @@ module ApiCall
     end
 
     # get commits history
-    def commits_history
+    def commits
       api_endpoint = [@github_base_url, 'commits'].join('/')
       req_params = {}
       req_params[:access_token] = @access_token
@@ -92,8 +92,8 @@ module ApiCall
       call_api_pages(api_endpoint, req_params)
     end
 
-    # get commits_history url
-    def commits_history_url
+    # get commits url
+    def commits_url
       api_endpoint = [@github_base_url, 'commits'].join('/')
       req_params = {}
       req_params[:access_token] = @access_token

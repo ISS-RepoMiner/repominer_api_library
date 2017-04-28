@@ -26,8 +26,8 @@ describe 'Github_api_call specifications' do
   it 'should be able to get response from the repo_meta' do
     @object.repo_meta.status.must_equal 200
   end
-  it 'should be able to get response from the commits_history' do
-    @object.commits_history.each { |i| i.status.must_equal 200 }
+  it 'should be able to get response from the ' do
+    @object.commits.each { |i| i.status.must_equal 200 }
   end
   it 'should be able to get response from the issues' do
     @object.issues.each { |i| i.status.must_equal 200 }
@@ -35,18 +35,18 @@ describe 'Github_api_call specifications' do
   it 'should be able to get response from the last_commits_days' do
     @object.last_commits_days.status.must_equal 200
   end
-  it 'should be able to get response from the commits_history when using update' do
+  it 'should be able to get response from the  when using update' do
     @object.update(ENV['UPDATE_TIME'])
-    @object.commits_history.each { |i| i.status.must_equal 200 }
+    @object.commits.each { |i| i.status.must_equal 200 }
   end
   it 'should be able to get response from the issues when using update' do
     @object.issues.each { |i| i.status.must_equal 200 }
   end
 
-  it 'should get less row from commits_history when using update' do
+  it 'should get less row from  when using update' do
     @object_update.update(ENV['UPDATE_TIME'])
-    all_commit = @object_all.commits_history
-    update_commit = @object_update.commits_history
+    all_commit = @object_all.commits
+    update_commit = @object_update.commits
     all_count = 0
     update_count = 0
     all_commit.each { |i| all_count += i.parse.count }

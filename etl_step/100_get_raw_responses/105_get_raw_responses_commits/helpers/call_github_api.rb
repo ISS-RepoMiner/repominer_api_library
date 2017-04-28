@@ -11,12 +11,12 @@ class CallGithubApi
       row = []
       status = []
       body = []
-      response = object.commits_history
+      response = object.commits
       response.each do |r|
         status << r.status.to_s
         body << r.body.to_s
       end
-      url = object.commits_history_url
+      url = object.commits_url
       row << { repo_name: repo['REPO_NAME'],
                url: url.to_s,
                response: body.to_s,
