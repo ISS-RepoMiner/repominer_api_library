@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '2.4.0'
 
-gem 'config_env'
+gem 'econfig'
 gem 'gems'
 gem 'http'
 gem 'kiba'
