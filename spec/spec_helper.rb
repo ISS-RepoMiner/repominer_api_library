@@ -14,15 +14,15 @@ BESTGEMS_CASSETTE_FILE = 'bestgems_api'
 RUBYGEMS_CASSETTE_FILE = 'rubygems_api'
 RESULT_FILE = "#{CASSETTES_FOLDER}/github_api_results.yml"
 
-if File.file?('./config/credentials.yml')
-  CREDENTIALS = YAML.load(File.read('./config/credentials.yml'))
-  ENV['REPO_USER'] = CREDENTIALS[:REPO_USER]
-  ENV['REPO_NAME'] = CREDENTIALS[:REPO_NAME]
-  ENV['USER_AGENT'] = CREDENTIALS[:USER_AGENT]
-  ENV['ACCESS_TOKEN'] = CREDENTIALS[:ACCESS_TOKEN]
+if File.file?('./config/secret.yml')
+  CREDENTIALS = YAML.load(File.read('./config/secret.yml'))
+  ENV['REPO_USER'] = 'vcr'
+  ENV['REPO_NAME'] = 'vcr'
+  ENV['USER_AGENT'] = CREDENTIALS['development'][:USER_AGENT]
+  ENV['ACCESS_TOKEN'] = CREDENTIALS['development'][:ACCESS_TOKEN]
   time = Time.now - 60 * 60 * 24 * 30 * 2
   ENV['UPDATE_TIME'] = time.to_time.iso8601
-  ENV['GEM_NAME'] = CREDENTIALS[:GEM_NAME]
+  ENV['GEM_NAME'] = 'vcr'
 end
 
 VCR.configure do |c|

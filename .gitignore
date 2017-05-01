@@ -1,3 +1,4 @@
-/config/credentials.yml
+/config/app.yml
+/config/secret.yml
 Gemfile.lock
-/db/repominer_etl.db
+/db/api_responses.db

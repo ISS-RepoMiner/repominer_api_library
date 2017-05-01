@@ -17,9 +17,6 @@ describe 'Github_api_call specifications' do
   it 'should be able new a ApiCall::GithubApiCall object' do
     @object.must_be_instance_of ApiCall::GithubApiCall
   end
-  it 'should be able to get response from the last_year_commit_activity' do
-    @object.last_year_commit_activity.status.must_equal 200
-  end
   it 'should be able to get response from the contributors_list' do
     @object.contributors_list.status.must_equal 200
   end
@@ -31,9 +28,6 @@ describe 'Github_api_call specifications' do
   end
   it 'should be able to get response from the issues' do
     @object.issues.each { |i| i.status.must_equal 200 }
-  end
-  it 'should be able to get response from the last_commits_days' do
-    @object.last_commits_days.status.must_equal 200
   end
   it 'should be able to get response from the  when using update' do
     @object.update(ENV['UPDATE_TIME'])
