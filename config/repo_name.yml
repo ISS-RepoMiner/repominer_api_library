@@ -1,10 +1,4 @@
 ---
-  - REPO_USER: 'vcr'
-    REPO_NAME: 'vcr'
-    GEM_NAME: 'vcr'
   - REPO_USER: 'thbar'
     REPO_NAME: 'kiba'
     GEM_NAME: 'kiba'
-  - REPO_USER: 'bblimke'
-    REPO_NAME: 'webmock'
-    GEM_NAME: 'webmock'

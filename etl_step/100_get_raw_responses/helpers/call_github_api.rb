@@ -19,7 +19,7 @@ class CallGithubApi
     if @data_method == 'issues' || @data_method == 'commits'
       @list.each do |repo|
         object = ApiCall::GithubApiCall.new(repo['REPO_USER'], repo['REPO_NAME'], ENV['USER_AGENT'], ENV['ACCESS_TOKEN'])
-        object.update(ENV['UNTIL'])
+        #object.update(ENV['UNTIL'])
         row = []
         status = []
         body = []
