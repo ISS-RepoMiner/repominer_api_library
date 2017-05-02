@@ -1,6 +1,6 @@
 
 # Get the reponame list and calling each repo's api
-class CallBestGemsApi
+class CallRubyGemsApi
   def initialize(list)
     @list = list
   end

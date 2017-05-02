@@ -1,7 +1,6 @@
 development:
   :CONTRIBUTORS_LIST: 'repos_raw_responses_contributors_list'
   :REPO_META: 'repos_raw_responses_repo_meta'
-  :LAST_COMMITS_DAYS: 'repos_raw_responses_last_commits_days'
   :COMMITS: 'repos_raw_responses_commits'
   :ISSUES: 'repos_raw_responses_issues'
   :TOTAL_DOWNLOAD_TREND: 'gems_raw_responses_total_download_trend'
@@ -10,7 +9,6 @@ development:
 production:
   :CONTRIBUTORS_LIST: 'repos_raw_responses_contributors_list'
   :REPO_META: 'repos_raw_responses_repo_meta'
-  :LAST_COMMITS_DAYS: 'repos_raw_responses_last_commits_days'
   :COMMITS: 'repos_raw_responses_commits'
   :ISSUES: 'repos_raw_responses_issues'
   :TOTAL_DOWNLOAD_TREND: 'gems_raw_responses_total_download_trend'

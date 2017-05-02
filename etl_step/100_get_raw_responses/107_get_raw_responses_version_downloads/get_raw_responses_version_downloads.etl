@@ -1,11 +1,9 @@
 require_relative "#{Dir.getwd}/etl_step/100_get_raw_responses/helpers/init.rb"
-require_relative "helpers/init.rb"
-
-db = ConnectToDB.call
+db = ConnectToDB.call('api_responses')
 
 list_of_repo = CreateRepoList.call
 
-source CallBestGemsApi, list_of_repo
+source CallRubyGemsApi, list_of_repo
 
 destination SaveRecordToDB, db, 'gems_raw_responses_version_downloads'
 
