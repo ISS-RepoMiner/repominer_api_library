@@ -15,14 +15,14 @@ class CallGithubApi
         body = []
         response = object.send(@data_method)
         response.each do |r|
-          status << r.status.to_s
-          body << r.body.to_s
+          status << r.status
+          body << r.body
         end
         url = object.send(@data_method + '_url')
         row << { repo_name: repo['REPO_NAME'],
-                 url: url.to_s,
-                 response: body.to_s,
-                 status: status.to_s }
+                 url: url.to_json,
+                 response: body.to_json,
+                 status: status.to_json }
         yield row.dup
       end
     else
@@ -30,7 +30,7 @@ class CallGithubApi
         object = ApiCall::GithubApiCall.new(repo['REPO_USER'], repo['REPO_NAME'], @config.USER_AGENT, @config.ACCESS_TOKEN)
         row = []
         response = object.send(@data_method)
-        object.update(ENV['UNTIL'])
+        #object.update(ENV['UNTIL'])
         url = object.send(@data_method + '_url')
         row << { repo_name: repo['REPO_NAME'],
                  url: url,
