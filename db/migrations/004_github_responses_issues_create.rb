@@ -7,8 +7,7 @@ Sequel.migration do
       String :repo_name
       String :update_time
       Text :url
-      Text :response
-      Text :status
+      Text :responses
     end
   end
 end

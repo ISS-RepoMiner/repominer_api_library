@@ -6,7 +6,7 @@ Sequel.migration do
       primary_key :id
       String :gem_name
       String :update_time
-      Text :response
+      Text :responses
     end
   end
 end
