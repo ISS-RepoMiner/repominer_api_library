@@ -8,14 +8,15 @@ class CallBestGemsApi
   def each
     @list.each do |gems|
       object = ApiCall::BestGemsApiCall.new(gems['GEM_NAME'])
-      row = []
-      response = object.send(@data_method)
+      http_response = object.send(@data_method)
+      responses = http_response.map do |r|
+        { status: r.status, body: r.body }
+      end
       url = object.url(@data_method)
-      row << { gem_name: gems['GEM_NAME'],
-               url: url,
-               response: response.body.to_s,
-               status: response.status.to_s }
-      yield row.dup
+      row = { gem_name: gems['GEM_NAME'],
+              url: url,
+              responses: responses.to_json }
+      yield row
     end
   end
 end

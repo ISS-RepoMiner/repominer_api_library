@@ -1,5 +1,5 @@
 require 'rake/testtask'
-require 'Econfig'
+require 'econfig'
 
 # Print current RACK_ENV it's using
 
@@ -32,10 +32,17 @@ namespace :db do
     Sequel::Migrator.run(api_responses_db, 'db/migrations')
   end
 end
-
+task :config do
+  extend Econfig::Shortcut
+  Econfig.env = 'development'
+  Econfig.root = File.expand_path('../', File.expand_path(__FILE__))
+end
+task :test_config => [:config] do
+  puts config.ACCESS_TOKEN
+end
 namespace :etl do
   desc 'Runs ETL Pipeline API Tasks'
-  task :get_data do
+  task :get_data => [:config] do
     sh 'kiba etl_step/100_get_raw_responses/101_get_raw_responses_contributors_list/get_raw_responses_contributors_list.etl'
     sh 'kiba etl_step/100_get_raw_responses/102_get_raw_responses_repo_meta/get_raw_responses_repo_meta.etl'
     sh 'kiba etl_step/100_get_raw_responses/103_get_raw_responses_commits/get_raw_responses_commits.etl'

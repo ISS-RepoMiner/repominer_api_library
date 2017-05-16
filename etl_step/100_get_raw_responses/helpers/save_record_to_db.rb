@@ -27,11 +27,11 @@ class SaveRecordToDB
   end
 
   def save_hash(hash)
-    if @destination_table.first(@name => array.first[@name]).nil?
+    # if @destination_table.first(@name => hash.first[@name]).nil?
       @destination_table.insert(hash)
-    else
-      @destination_table.first(@name => array.first[@name]).update(hash)
-    end
+    # else
+    #   @destination_table.first(@name => hash.first[@name]).update(hash)
+    # end
   end
 
   def naming(table_name)
