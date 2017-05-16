@@ -8,7 +8,7 @@ module ApiCall
 
     # get the commit activity in last year
     def version_downloads
-      Gems.versions @gem_name
+      [Gems.versions(@gem_name)]
     end
   end
 end

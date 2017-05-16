@@ -22,7 +22,7 @@ module ApiCall
       req_params = {}
       req_params[:access_token] = @access_token
       api_call_url = generate_api_url(api_endpoint, req_params)
-      get_call(api_call_url)
+      [get_call(api_call_url)]
     end
 
     # Get contributors_list url
@@ -30,7 +30,7 @@ module ApiCall
       api_endpoint = [@github_base_url, 'contributors'].join('/')
       req_params = {}
       req_params[:access_token] = @access_token
-      generate_api_url(api_endpoint, req_params)
+      [generate_api_url(api_endpoint, req_params)]
     end
 
     # get numbers of forks, stars
@@ -39,7 +39,7 @@ module ApiCall
       req_params = {}
       req_params[:access_token] = @access_token
       api_call_url = generate_api_url(api_endpoint, req_params)
-      get_call(api_call_url)
+      [get_call(api_call_url)]
     end
 
     # get repo_meta url
@@ -47,7 +47,7 @@ module ApiCall
       api_endpoint = @github_base_url
       req_params = {}
       req_params[:access_token] = @access_token
-      generate_api_url(api_endpoint, req_params)
+      [generate_api_url(api_endpoint, req_params)]
     end
 
     # get commits history
