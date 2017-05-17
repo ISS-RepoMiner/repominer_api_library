@@ -32,24 +32,27 @@ namespace :db do
     Sequel::Migrator.run(api_responses_db, 'db/migrations')
   end
 end
+
 task :config do
   extend Econfig::Shortcut
   Econfig.env = 'development'
   Econfig.root = File.expand_path('../', File.expand_path(__FILE__))
 end
+
 task :test_config => [:config] do
   puts config.ACCESS_TOKEN
 end
+
 namespace :etl do
   desc 'Runs ETL Pipeline API Tasks'
   task :get_data => [:config] do
     sh 'kiba etl_step/100_get_raw_responses/101_get_raw_responses_contributors_list/get_raw_responses_contributors_list.etl'
-    sh 'kiba etl_step/100_get_raw_responses/102_get_raw_responses_repo_meta/get_raw_responses_repo_meta.etl'
-    sh 'kiba etl_step/100_get_raw_responses/103_get_raw_responses_commits/get_raw_responses_commits.etl'
-    sh 'kiba etl_step/100_get_raw_responses/104_get_raw_responses_issues/get_raw_responses_issues.etl'
-    sh 'kiba etl_step/100_get_raw_responses/105_get_raw_responses_total_download_trend/get_raw_responses_total_download_trend.etl'
-    sh 'kiba etl_step/100_get_raw_responses/106_get_raw_responses_daily_download_trend/get_raw_responses_daily_download_trend.etl'
-    sh 'kiba etl_step/100_get_raw_responses/107_get_raw_responses_version_downloads/get_raw_responses_version_downloads.etl'
+    # sh 'kiba etl_step/100_get_raw_responses/102_get_raw_responses_repo_meta/get_raw_responses_repo_meta.etl'
+    # sh 'kiba etl_step/100_get_raw_responses/103_get_raw_responses_commits/get_raw_responses_commits.etl'
+    # sh 'kiba etl_step/100_get_raw_responses/104_get_raw_responses_issues/get_raw_responses_issues.etl'
+    # sh 'kiba etl_step/100_get_raw_responses/105_get_raw_responses_total_download_trend/get_raw_responses_total_download_trend.etl'
+    # sh 'kiba etl_step/100_get_raw_responses/106_get_raw_responses_daily_download_trend/get_raw_responses_daily_download_trend.etl'
+    # sh 'kiba etl_step/100_get_raw_responses/107_get_raw_responses_version_downloads/get_raw_responses_version_downloads.etl'
   end
 end
 

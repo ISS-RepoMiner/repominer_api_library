@@ -12,7 +12,7 @@ class CallRubyGemsApi
       response = object.version_downloads
       row << { gem_name: gems['GEM_NAME'],
                responses: response.to_json }
-      yield row.dup
+      yield row
     end
   end
 end

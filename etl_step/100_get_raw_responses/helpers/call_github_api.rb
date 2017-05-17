@@ -6,42 +6,20 @@ class CallGithubApi
   end
 
   def each
-    # if @data_method == 'issues' || @data_method == 'commits'
-      @list.each do |repo|
-        object = ApiCall::GithubApiCall.new(repo['REPO_USER'],
-                                            repo['REPO_NAME'],
-                                            @config.USER_AGENT,
-                                            @config.ACCESS_TOKEN)
-        # object.update(ENV['UNTIL'])
-        # status = []
-        # body = []
-        http_response = object.send(@data_method)
-        responses = http_response.map do |r|
-          # status << r.status
-          # body << r.body
-          { status: r.status, body: r.body }
-        end
-        url = object.send(@data_method + '_url')
-        row = { repo_name: repo['REPO_NAME'],
-                url: url.to_json,
-                responses: responses.to_json }
-        # yield row.dup
-        yield row
-      end
-    # else
-    #   @list.each do |repo|
-    #     object = ApiCall::GithubApiCall.new(repo['REPO_USER'],
-    #                                         repo['REPO_NAME'],
-    #                                         @config.USER_AGENT,
-    #                                         @config.ACCESS_TOKEN)
-    #     response = object.send(@data_method)
-    #     url = object.send(@data_method + '_url')
-    #     row = { repo_name: repo['REPO_NAME'],
-    #              url: url,
-    #              response: response.body.to_s,
-    #              status: response.status.to_s }
-    #     yield row.dup
-    #   end
-    # end
+    @list.each do |repo|
+    object = ApiCall::GithubApiCall.new(repo['REPO_USER'],
+                                        repo['REPO_NAME'],
+                                        @config.USER_AGENT,
+                                        @config.ACCESS_TOKEN)
+    http_response = object.send(@data_method)
+    responses = http_response.map do |r|
+      { status: r.status, body: r.body }
+    end
+    url = object.send(@data_method + '_url')
+    row = { repo_name: repo['REPO_NAME'],
+            url: url.to_json,
+            responses: responses.to_json }
+    yield row
+    end
   end
 end
