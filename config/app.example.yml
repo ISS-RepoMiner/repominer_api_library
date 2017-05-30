@@ -1,17 +1,31 @@
 ---
 development:
   CONTRIBUTORS_LIST: 'repos_raw_responses_contributors_list'
-  REPO_META: 'repos_raw_responses_repo_meta'
+  META: 'repos_raw_responses_repo_meta'
   COMMITS: 'repos_raw_responses_commits'
   ISSUES: 'repos_raw_responses_issues'
   TOTAL_DOWNLOAD_TREND: 'gems_raw_responses_total_download_trend'
   DAILY_DOWNLOAD_TREND: 'gems_raw_responses_daily_download_trend'
   VERSION_DOWNLOADS: 'gems_raw_responses_version_downloads'
+  #############################################################################
+  PARSE_REPO_META: 'repo_meta'
+  PARSE_CONTRIBUTORS: 'contributors'
+  PARSE_COMMITS: 'commits'
+  PARSE_ISSUES: 'issues'
+  PARSE_DAILY_DOWNLOADS: 'daily_downloads'
+  PARSE_VERSIONS: 'versions'
 production:
   CONTRIBUTORS_LIST: 'repos_raw_responses_contributors_list'
-  REPO_META: 'repos_raw_responses_repo_meta'
+  META: 'repos_raw_responses_repo_meta'
   COMMITS: 'repos_raw_responses_commits'
   ISSUES: 'repos_raw_responses_issues'
   TOTAL_DOWNLOAD_TREND: 'gems_raw_responses_total_download_trend'
   DAILY_DOWNLOAD_TREND: 'gems_raw_responses_daily_download_trend'
   VERSION_DOWNLOADS: 'gems_raw_responses_version_downloads'
+  #############################################################################
+  PARSE_REPO_META: 'repo_meta'
+  PARSE_CONTRIBUTORS: 'contributors'
+  PARSE_COMMITS: 'commits'
+  PARSE_ISSUES: 'issues'
+  PARSE_DAILY_DOWNLOADS: 'daily_downloads'
+  PARSE_VERSIONS: 'versions'
