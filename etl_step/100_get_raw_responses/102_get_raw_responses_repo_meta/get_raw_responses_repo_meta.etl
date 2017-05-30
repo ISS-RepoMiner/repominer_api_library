@@ -9,9 +9,9 @@ list_of_repo = CreateRepoList.call
 
 source CallGithubApi, list_of_repo, 'repo_meta', config
 
-destination SaveRecordToDB, db, config.REPO_META
+destination SaveRecordToDB, db, config.META
 
 post_process do
-  results = CountProcessedRecords.call(db, config.REPO_META)
+  results = CountProcessedRecords.call(db, config.META)
   puts "Total processed records: #{results}."
 end

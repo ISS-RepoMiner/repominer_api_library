@@ -1,0 +1,18 @@
+require_relative "#{Dir.getwd}/etl_step/200_parse_to_rdb/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+api_response_db = ConnectToDB.call('api_responses')
+parse_response_db = ConnectToDB.call('parse_responses')
+
+source ReadRecordsFromDB, api_response_db, config.CONTRIBUTORS_LIST
+
+transform ProcessContributors
+
+destination SaveRecordToDB, parse_response_db, config.PARSE_CONTRIBUTORS
+
+post_process do
+  results = CountProcessedRecords.call(parse_response_db, config.PARSE_CONTRIBUTORS)
+  puts "Total processed records: #{results}."
+end

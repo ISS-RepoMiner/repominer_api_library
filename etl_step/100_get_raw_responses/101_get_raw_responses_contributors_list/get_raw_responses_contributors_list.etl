@@ -1,7 +1,7 @@
 require_relative "#{Dir.getwd}/etl_step/100_get_raw_responses/helpers/init.rb"
-#extend Econfig::Shortcut
-#Econfig.env = 'development'
-#Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
 
 db = ConnectToDB.call('api_responses')
 
