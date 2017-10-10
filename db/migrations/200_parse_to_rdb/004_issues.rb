@@ -3,9 +3,9 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:issues) do
-      primary_key :id
+      String :issue_id, primary_key: true
       foreign_key :repo_id, :repos
-      String :issue_id
+      foreign_key :contributors_id, :contributors
       String :state
       DateTime :created_at
       DateTime :closed_at
