@@ -6,9 +6,9 @@ Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
 api_response_db = ConnectToDB.call('api_responses')
 parse_response_db = ConnectToDB.call('parse_responses')
 
-source ReadRecordsFromDB, api_response_db, config.CONTRIBUTORS_LIST
+source ReadRecordsFromDB, api_response_db, config.ISSUES
 
-transform ProcessContributors
+transform ProcessIssuerToContributor
 
 destination SaveRecordToContributor, parse_response_db, config.PARSE_CONTRIBUTORS
 
