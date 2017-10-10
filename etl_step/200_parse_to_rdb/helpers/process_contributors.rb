@@ -15,10 +15,13 @@ class ProcessContributors
     JSON.parse(JSON.parse(row[:responses]).first['body'])
   end
 
+  # def parse(row)
+  #   [JSON.parse(JSON.parse(row[:responses]).first['body']), row[:repo_name]]
+  # end
+  #
   def contribution_list(list)
     list.map! do |h|
-      # repo_id unknow
-      { repo_id: nil, contributer_id: h['id'], contribution_name: h['login'] }
+      { contributer_id: h['id'], contributer_name: h['login'] }
     end
   end
 end

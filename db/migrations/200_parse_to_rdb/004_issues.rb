@@ -4,11 +4,11 @@ Sequel.migration do
   change do
     create_table(:issues) do
       primary_key :id
-      foreign_key :repo_meta_id, :repo_meta
+      foreign_key :repo_id, :repos
       String :issue_id
       String :state
-      String :created_at
-      String :closed_at
+      DateTime :created_at
+      DateTime :closed_at
     end
   end
 end

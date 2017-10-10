@@ -4,10 +4,11 @@ Sequel.migration do
   change do
     create_table(:commits) do
       primary_key :id
+      # TODO: take a look at mutiple contributors's commit, or author and commiter
       foreign_key :contributors_id, :contributors
-      foreign_key :repo_meta_id, :repo_meta
+      foreign_key :repo_id, :repos
       String :commit_id
-      String :commit_time
+      DateTime :commit_time
     end
   end
 end

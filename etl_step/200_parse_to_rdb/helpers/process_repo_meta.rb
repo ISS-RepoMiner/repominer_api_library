@@ -9,8 +9,8 @@ class ProcessRepoMeta
     # row is hash, return array of hashes
     parsed = parse(row)
     {
+      repo_id: parsed['id'],
       repo_name: row[:repo_name],
-      owner_id: parsed['owner']['id'],
       created_at: parsed['created_at'],
       update_at: parsed['updated_at'],
       pushed_at: parsed['pushed_at'],

@@ -32,6 +32,16 @@ namespace :db do
     parse_responses_db = ConnectToDB.call('parse_responses')
     Sequel::Migrator.run(parse_responses_db, 'db/migrations/200_parse_to_rdb')
   end
+
+  desc 'Reset migrations (full rollback and migration)'
+  task :reset_2 do
+    require 'sequel'
+    require_relative 'db/services/connect_to_db'
+    Sequel.extension :migration
+    parse_responses_db = ConnectToDB.call('parse_responses')
+    Sequel::Migrator.run(parse_responses_db, 'db/migrations/200_parse_to_rdb', target: 0)
+    Sequel::Migrator.run(parse_responses_db, 'db/migrations/200_parse_to_rdb')
+  end
   ##############################################################################
   desc 'Reset migrations (full rollback and migration)'
   task :reset do
@@ -69,10 +79,12 @@ namespace :etl do
   task :parse_data do
     sh 'kiba etl_step/200_parse_to_rdb/201_parse_repo_meta/parse_repo_meta.etl'
     sh 'kiba etl_step/200_parse_to_rdb/202_parse_contributors/parse_contributors.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/203_parse_commits/parse_commits.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/204_parse_issues/parse_issues.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/205_parse_daily_downloads/parse_daily_downloads.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/206_parse_versions/parse_versions.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/203_parse_commits/parse_commits.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/204_parse_issues/parse_issues.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/205_parse_daily_downloads/parse_daily_downloads.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/206_parse_versions/parse_versions.etl'
+    sh 'kiba etl_step/200_parse_to_rdb/207_parse_create_repo/parse_create_repo.etl'
+
   end
 end
 

@@ -8,12 +8,13 @@ development:
   DAILY_DOWNLOAD_TREND: 'gems_raw_responses_daily_download_trend'
   VERSION_DOWNLOADS: 'gems_raw_responses_version_downloads'
   #############################################################################
-  PARSE_REPO_META: 'repo_meta'
+  PARSE_REPO_META: 'repos'
   PARSE_CONTRIBUTORS: 'contributors'
   PARSE_COMMITS: 'commits'
   PARSE_ISSUES: 'issues'
   PARSE_DAILY_DOWNLOADS: 'daily_downloads'
   PARSE_VERSIONS: 'versions'
+  PARSE_CREATE_REPO: 'contributors_repos'
 production:
   CONTRIBUTORS_LIST: 'repos_raw_responses_contributors_list'
   META: 'repos_raw_responses_repo_meta'
@@ -29,3 +30,4 @@ production:
   PARSE_ISSUES: 'issues'
   PARSE_DAILY_DOWNLOADS: 'daily_downloads'
   PARSE_VERSIONS: 'versions'
+  PARSE_CREATE_REPO: 'contributors_repos'
