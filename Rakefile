@@ -74,6 +74,7 @@ namespace :etl do
     sh 'kiba etl_step/100_get_raw_responses/105_get_raw_responses_total_download_trend/get_raw_responses_total_download_trend.etl'
     sh 'kiba etl_step/100_get_raw_responses/106_get_raw_responses_daily_download_trend/get_raw_responses_daily_download_trend.etl'
     sh 'kiba etl_step/100_get_raw_responses/107_get_raw_responses_version_downloads/get_raw_responses_version_downloads.etl'
+    sh 'kiba etl_step/100_get_raw_responses/108_get_name_list/get_name_list.etl'
   end
   desc 'Runs parse data form raw_responses'
   task :parse_data do
@@ -84,7 +85,7 @@ namespace :etl do
     sh 'kiba etl_step/200_parse_to_rdb/203_parse_commits/parse_commits.etl'
     sh 'kiba etl_step/200_parse_to_rdb/204_parse_issues/parse_issues.etl'
     sh 'kiba etl_step/200_parse_to_rdb/205_parse_daily_downloads/parse_daily_downloads.etl'
-    # sh 'kiba etl_step/200_parse_to_rdb/206_parse_versions/parse_versions.etl'
+    sh 'kiba etl_step/200_parse_to_rdb/206_parse_versions/parse_versions.etl'
     sh 'kiba etl_step/200_parse_to_rdb/207_parse_create_repo/parse_create_repo.etl'
 
   end
