@@ -28,7 +28,10 @@ class SaveRecordToContributor
   end
 
   def save_hash(hash)
-    @destination_table.insert(hash)
+    parse_response_db = ConnectToDB.call('parse_responses')
+    if (parse_response_db[:contributors].where(contributer_id: hash[:contributer_id]).empty?)
+      @destination_table.insert(hash)
+    end
   end
 
   def naming(table_name)

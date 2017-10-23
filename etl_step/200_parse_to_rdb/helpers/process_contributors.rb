@@ -21,8 +21,61 @@ class ProcessContributors
   #
   def contribution_list(list)
     list.map! do |h|
-      { contributer_id: h['id'], contributer_name: h['login'] }
+      { contributer_id: h['id'],
+        contributer_name: h['login'],
+        avatar_url: h['avatar_url'],
+        gravatar_id: h['gravatar_id'],
+        url: h['url'],
+        html_url: h['html_url'],
+        followers_url: h['followers_url'],
+        following_url: h['following_url'],
+        gists_url: h['gists_url'],
+        starred_url: h['starred_url'],
+        subscriptions_url: h['subscriptions_url'],
+        organizations_url: h['organizations_url'],
+        repos_url: h['repos_url'],
+        events_url: h['events_url'],
+        received_events_url: h['received_events_url'],
+        type: h['type'],
+        site_admin: h['site_admin'],
+        contributions: h['contributions'] }
     end
+  end
+end
+
+class ProcessOwner
+  def initialize
+  end
+
+  def process(row)
+    # row is hash, return array of hashes
+    parsed = parse(row)
+    contribution_list(parsed)
+  end
+
+  def parse(row)
+    JSON.parse(JSON.parse(row[:responses]).first['body'])['owner']
+  end
+
+  def contribution_list(list)
+    { contributer_id: list['id'],
+      contributer_name: list['login'],
+      avatar_url: list['avatar_url'],
+      gravatar_id: list['gravatar_id'],
+      url: list['url'],
+      html_url: list['html_url'],
+      followers_url: list['followers_url'],
+      following_url: list['following_url'],
+      gists_url: list['gists_url'],
+      starred_url: list['starred_url'],
+      subscriptions_url: list['subscriptions_url'],
+      organizations_url: list['organizations_url'],
+      repos_url: list['repos_url'],
+      events_url: list['events_url'],
+      received_events_url: list['received_events_url'],
+      type: list['type'],
+      site_admin: list['site_admin'],
+      contributions: list['contributions'] }
   end
 end
 

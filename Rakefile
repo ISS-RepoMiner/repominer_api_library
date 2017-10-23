@@ -78,15 +78,16 @@ namespace :etl do
   end
   desc 'Runs parse data form raw_responses'
   task :parse_data do
-    sh 'kiba etl_step/200_parse_to_rdb/201_parse_repo_meta/parse_repo_meta.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/202_parse_contributors/parse_contributors.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/2021_parse_committer_to_contributor/parse_committer_to_contributor.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/2022_parse_issuer_to_contributor/parse_issuer_to_contributor.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/203_parse_commits/parse_commits.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/204_parse_issues/parse_issues.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/205_parse_daily_downloads/parse_daily_downloads.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/206_parse_versions/parse_versions.etl'
-    sh 'kiba etl_step/200_parse_to_rdb/207_parse_create_repo/parse_create_repo.etl'
+    sh 'kiba etl_step/200_parse_to_rdb/201_parse_contributors/parse_contributors.etl'
+    sh 'kiba etl_step/200_parse_to_rdb/201_parse_contributors/parse_owner.etl'
+    sh 'kiba etl_step/200_parse_to_rdb/201_parse_contributors/parse_committer_to_contributor.etl'
+    sh 'kiba etl_step/200_parse_to_rdb/201_parse_contributors/parse_issuer_to_contributor.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/202_parse_repo_meta/parse_repo_meta.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/203_parse_commits/parse_commits.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/204_parse_issues/parse_issues.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/205_parse_daily_downloads/parse_daily_downloads.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/206_parse_versions/parse_versions.etl'
+    # sh 'kiba etl_step/200_parse_to_rdb/207_parse_create_repo/parse_create_repo.etl'
 
   end
 end
