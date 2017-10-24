@@ -15,6 +15,22 @@ class ProcessIssues
     JSON.parse(row[:responses])
   end
 
+  # Prevent for nil error
+  def pull_request(obj, info)
+    obj['pull_request'][info]
+  rescue
+    nil
+  end
+
+  # Prevent for nil error
+  def array_to_s(obj)
+    if obj.nil?
+      nil
+    else
+      obj.to_s
+    end
+  end
+
   def issues_list(res_list, row)
     hash_list = []
     parse_response_db = ConnectToDB.call('parse_responses')
@@ -22,11 +38,32 @@ class ProcessIssues
     res_list.each do |arr|
       JSON.parse(arr['body']).map do |h|
         hash_list << { repo_id: repo_id,
-                       contributors_id: issuer_id(h),
+                       issuer_id: issuer_id(h),
                        issue_id: h['id'],
-                       state: h['state'],
+                       issue_url: h['url'],
+                       repository_url: h['repository_url'],
+                       issue_labels_url: h['labels_url'],
+                       comments_url: h['comments_url'],
+                       events_url: h['events_url'],
+                       html_url: h['html_url'],
+                       issue_number: h['number'],
+                       issue_title: h['title'],
+                       issue_label: array_to_s(h['label']),
+                       issue_state: h['state'],
+                       issue_locked: h['locked'],
+                       issue_assignee: array_to_s(h['assignee']),
+                       issue_assignees: array_to_s(h['assignees']),
+                       issue_milestone: h['milestone'],
+                       issue_comments: h['comments'],
                        created_at: h['created_at'],
-                       closed_at: h['closed_at'] }
+                       updated_at: h['updated_at'],
+                       closed_at: h['closed_at'],
+                       author_association: h['author_association'],
+                       pull_request_url: pull_request(h, 'url'),
+                       pull_request_html_url: pull_request(h, 'html_url'),
+                       pull_request_diff_url: pull_request(h, 'diff_url'),
+                       pull_request_patch_url: pull_request(h, 'patch_url'),
+                       issue_body: h['body'] }
       end
     end
     hash_list
