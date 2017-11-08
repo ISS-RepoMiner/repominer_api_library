@@ -39,6 +39,7 @@ class ProcessIssues
       JSON.parse(arr['body']).map do |h|
         hash_list << { repo_id: repo_id,
                        issuer_id: issuer_id(h),
+                       record_at: row[:update_time],
                        issue_id: h['id'],
                        issue_url: h['url'],
                        repository_url: h['repository_url'],

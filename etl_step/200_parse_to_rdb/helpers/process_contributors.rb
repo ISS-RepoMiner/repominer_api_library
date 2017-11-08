@@ -8,21 +8,22 @@ class ProcessContributors
   def process(row)
     # row is hash, return array of hashes
     parsed = parse(row)
-    contribution_list(parsed)
+    contribution_list(parsed, row)
   end
 
   def parse(row)
-    JSON.parse(JSON.parse(row[:responses]).first['body'])
+    JSON.parse(row[:responses]).first['body']
   end
 
   # def parse(row)
   #   [JSON.parse(JSON.parse(row[:responses]).first['body']), row[:repo_name]]
   # end
   #
-  def contribution_list(list)
+  def contribution_list(list, row)
     list.map! do |h|
       { contributer_id: h['id'],
         contributer_name: h['login'],
+        record_at: row[:update_time],
         avatar_url: h['avatar_url'],
         gravatar_id: h['gravatar_id'],
         url: h['url'],
@@ -54,7 +55,7 @@ class ProcessOwner
   end
 
   def parse(row)
-    JSON.parse(JSON.parse(row[:responses]).first['body'])['owner']
+    JSON.parse(row[:responses]).first['body']
   end
 
   def contribution_list(list)

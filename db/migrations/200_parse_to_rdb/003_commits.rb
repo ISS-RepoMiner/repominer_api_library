@@ -4,8 +4,8 @@ Sequel.migration do
   change do
     create_table(:commits) do
       String :commit_id, primary_key: true
-      # TODO: take a look at mutiple contributors's commit, or author and commiter
       foreign_key :repo_id, :repos
+      String :record_at
       DateTime :commit_time
       String :commit_message
       String :tree_sha

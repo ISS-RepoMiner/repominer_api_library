@@ -1,3 +1,4 @@
+require 'time'
 class CallGithubApi
   def initialize(list, data_method, config)
     @list = list
@@ -13,10 +14,11 @@ class CallGithubApi
                                         @config.ACCESS_TOKEN)
     http_response = object.send(@data_method)
     responses = http_response.map do |r|
-      { status: r.status, body: r.body }
+      { status: r.status, body: JSON.parse(r.body) }
     end
     url = object.send(@data_method + '_url')
     row = { repo_name: repo['REPO_NAME'],
+            update_time: Time.now.to_time.iso8601,
             url: url.to_json,
             responses: responses.to_json }
     yield row

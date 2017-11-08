@@ -16,6 +16,22 @@ module ApiCall
       @update_time = update_time
     end
 
+    # Input url and params and call api
+    def general_call(url, req_params)
+      api_endpoint = url
+      req_params[:access_token] = @access_token
+      api_call_url = generate_api_url(api_endpoint, req_params)
+      [get_call(api_call_url)]
+    end
+
+    # Input url and params and call api for more call staff
+    def general_call_pages(url, req_params)
+      api_endpoint = url
+      req_params[:access_token] = @access_token
+      req_params[:since] = @update_time if @update_time
+      call_api_pages(api_endpoint, req_params)
+    end
+
     # Get the contributors # get the total commits
     def contributors_list
       api_endpoint = [@github_base_url, 'contributors'].join('/')

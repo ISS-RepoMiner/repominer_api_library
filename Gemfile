@@ -6,6 +6,7 @@ ruby '2.4.0'
 
 gem 'econfig'
 gem 'gems'
+gem 'hirb'
 gem 'http'
 gem 'kiba'
 gem 'minitest'

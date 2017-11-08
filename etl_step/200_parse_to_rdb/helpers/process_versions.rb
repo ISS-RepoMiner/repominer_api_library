@@ -15,6 +15,10 @@ class ProcessVersions
     JSON.parse(row[:responses])
   end
 
+  def detail(obj)
+    obj.length.zero? ? nil : obj.join(',')
+  end
+
   def version_list(res_list, row)
     api_response_db = ConnectToDB.call('api_responses')
     parse_response_db = ConnectToDB.call('parse_responses')
@@ -22,7 +26,22 @@ class ProcessVersions
     id = parse_response_db[:repos][repo_name: repo_name][:repo_id]
     res_list[0].map do |h|
       { repo_id: id,
-        version_num: h['number'] }
+        record_at: row[:update_time],
+        authors: h['authors'],
+        built_at: h['built_at'],
+        created_at: h['created_at'],
+        description: h['description'],
+        downloads_count: h['downloads_count'],
+        metadata: h['metadata'].to_s,
+        version_number: h['number'],
+        summary: h['summary'],
+        platform: h['platform'],
+        rubygems_version: h['rubygems_version'],
+        ruby_version: h['ruby_version'],
+        prerelease: h['prerelease'],
+        licenses: detail(h['licenses']),
+        requirements: detail(h['requirements']),
+        sha: h['sha'] }
     end
   end
 end

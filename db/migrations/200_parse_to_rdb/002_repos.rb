@@ -7,6 +7,8 @@ Sequel.migration do
       foreign_key :owner_id, :contributors
       String :repo_name
       String :full_name
+      # TODO:  Record_at
+      String :record_at
       Bool :private
       String :html_url
       String :description
@@ -77,8 +79,6 @@ Sequel.migration do
       Bool :permissions_pull
       String :network_count
       String :subscribers_count
-      # TODO: Last pushed_at
-      # TODO:  Record_at
     end
   end
 end

@@ -3,11 +3,11 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:contributors) do
-      # TODO: many to many join tables between contributors and repos
-      # foreign_key :repo_id, :repos
       String :contributer_id, primary_key: true
       String :contributer_name
+      String :record_at
       # TODO: check for email or some important data
+      # TODO: We only can get email from commit's data(committer and author)
       # String :contributer_mail
       String :avatar_url
       String :gravatar_id

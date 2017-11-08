@@ -4,15 +4,14 @@ Econfig.env = 'development'
 Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
 
 db = ConnectToDB.call('api_responses')
-
 list_of_repo = CreateRepoList.call
+list_of_url = CreateUrlList.call(db, config, 'stargazers_url')
 
+source CallGithubApiByUrl, list_of_url, config
 
-source CallGithubApi, list_of_repo, 'repo_meta', config
-
-destination SaveRecordToDB, db, config.META
+destination SaveRecordToDB, db, config.STARGAZERS
 
 post_process do
-  results = CountProcessedRecords.call(db, config.META)
+  results = CountProcessedRecords.call(db, config.STARGAZERS)
   puts "Total processed records: #{results}."
 end

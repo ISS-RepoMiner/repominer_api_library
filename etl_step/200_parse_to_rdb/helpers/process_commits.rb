@@ -9,7 +9,7 @@ class ProcessCommits
     # row is hash, return array of hashes
     @repo_name = row[:repo_name]
     res_list = first_parse(row)
-    commits_list(res_list)
+    commits_list(res_list, row)
   end
 
   def first_parse(row)
@@ -37,7 +37,7 @@ class ProcessCommits
     nil
   end
 
-  def commits_list(res_list)
+  def commits_list(res_list, row)
     hash_list = []
     parse_response_db = ConnectToDB.call('parse_responses')
     repo_id = parse_response_db[:repos].where(repo_name: @repo_name).first[:repo_id]
@@ -45,6 +45,7 @@ class ProcessCommits
       JSON.parse(arr['body']).each do |h|
         hash_list << { repo_id: repo_id,
                        commit_id: h['sha'],
+                       record_at: row[:update_time],
                        commit_time: h['commit']['author']['date'],
                        commit_message: h['commit']['message'],
                        tree_sha: h['commit']['tree']['sha'],

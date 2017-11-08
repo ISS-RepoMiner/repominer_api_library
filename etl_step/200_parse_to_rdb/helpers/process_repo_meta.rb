@@ -1,5 +1,6 @@
 
 require 'json'
+require 'time'
 # Parse raw response to rdb
 class ProcessRepoMeta
   def initialize
@@ -10,6 +11,7 @@ class ProcessRepoMeta
     parsed = parse(row)
     {
       repo_id: parsed['id'],
+      record_at: row[:update_time],
       repo_name: parsed['name'],
       full_name: parsed['full_name'],
       owner_id: parsed['owner']['id'],

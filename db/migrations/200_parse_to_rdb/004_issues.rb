@@ -6,6 +6,7 @@ Sequel.migration do
       String :issue_id, primary_key: true
       foreign_key :repo_id, :repos
       foreign_key :issuer_id, :contributors
+      String :record_at
       String :issue_url
       String :repository_url
       String :issue_labels_url
