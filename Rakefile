@@ -76,6 +76,8 @@ namespace :etl do
     sh 'kiba etl_step/100_get_raw_responses/107_get_raw_responses_version_downloads/get_raw_responses_version_downloads.etl'
     sh 'kiba etl_step/100_get_raw_responses/108_get_name_list/get_name_list.etl'
     sh 'kiba etl_step/100_get_raw_responses/109_get_raw_responses_stargazers/get_raw_responses_stargazers.etl'
+    sh 'kiba etl_step/100_get_raw_responses/110_get_raw_responses_subscribers/get_raw_responses_subscribers.etl'
+
 
   end
   desc 'Runs parse data form raw_responses'
