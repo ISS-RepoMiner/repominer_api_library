@@ -55,7 +55,7 @@ class ProcessOwner
   end
 
   def parse(row)
-    JSON.parse(row[:responses]).first['body']
+    JSON.parse(row[:responses]).first['body']['owner']
   end
 
   def contribution_list(list)
@@ -115,7 +115,7 @@ class ProcessCommitterToContributor
   def commits_list(res_list)
     hash_list = []
     res_list.each do |arr|
-      JSON.parse(arr['body']).each do |h|
+      arr['body'].each do |h|
         hash_list << { contributer_id: contributors_id(h),
                        contributer_name: contributer_name(h) }
       end
@@ -158,7 +158,7 @@ class ProcessIssuerToContributor
   def issues_list(res_list)
     hash_list = []
     res_list.each do |arr|
-      JSON.parse(arr['body']).each do |h|
+      arr['body'].each do |h|
         hash_list << { contributer_id: issuer_id(h),
                        contributer_name: issuer_name(h) }
       end

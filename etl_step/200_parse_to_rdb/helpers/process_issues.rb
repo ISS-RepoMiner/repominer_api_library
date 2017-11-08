@@ -36,7 +36,7 @@ class ProcessIssues
     parse_response_db = ConnectToDB.call('parse_responses')
     repo_id = parse_response_db[:repos].where(repo_name: row[:repo_name]).first[:repo_id]
     res_list.each do |arr|
-      JSON.parse(arr['body']).map do |h|
+      arr['body'].map do |h|
         hash_list << { repo_id: repo_id,
                        issuer_id: issuer_id(h),
                        record_at: row[:update_time],

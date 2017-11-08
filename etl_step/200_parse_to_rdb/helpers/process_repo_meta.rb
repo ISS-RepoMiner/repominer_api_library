@@ -89,6 +89,6 @@ class ProcessRepoMeta
   end
 
   def parse(row)
-    JSON.parse(JSON.parse(row[:responses]).first['body'])
+    JSON.parse(row[:responses]).first['body']
   end
 end

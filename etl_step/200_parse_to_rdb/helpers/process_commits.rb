@@ -42,7 +42,7 @@ class ProcessCommits
     parse_response_db = ConnectToDB.call('parse_responses')
     repo_id = parse_response_db[:repos].where(repo_name: @repo_name).first[:repo_id]
     res_list.each do |arr|
-      JSON.parse(arr['body']).each do |h|
+      arr['body'].each do |h|
         hash_list << { repo_id: repo_id,
                        commit_id: h['sha'],
                        record_at: row[:update_time],
