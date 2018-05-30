@@ -1,0 +1,24 @@
+require_relative "#{Dir.getwd}/etl_step/900_gather_features/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+get_raw_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_RAW_RESPONSES)
+
+relational_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.RELATIONL_RESPONSES)
+
+pruned_with_cutoff_time_db = ConnectToDB.call(config.DB_TYPE, config, config.PRUNED_WITH_CUTOFF_TIME)
+
+pre_process do
+  # set first downloads time
+  CutoffTime.set_first_download_at(get_raw_responses_db, config)
+end
+
+source ReadRecordsFromDB, relational_responses_db, config.RELATIONAL_GEMS
+
+destination SaveRecordToDBUnique, gather_features_db, config.FEATURES, ['id']
+
+post_process do
+  results = CountProcessedRecords.call(gather_features_db, config.FEATURES)
+  puts "Total processed records: #{results}."
+end

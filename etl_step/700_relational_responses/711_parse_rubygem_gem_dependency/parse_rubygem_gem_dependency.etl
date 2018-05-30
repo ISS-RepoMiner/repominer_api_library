@@ -1,0 +1,19 @@
+require_relative "#{Dir.getwd}/etl_step/700_relational_responses/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+parse_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.PARSE_BASIC_INFO)
+
+relational_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.RELATIONL_RESPONSES)
+
+source ReadRecordsFromDB, parse_basic_info_db, 'development_dependencies'
+
+transform ProcessGemDependencies
+
+destination SaveRecordToDBUnique, relational_responses_db, config.RELATIONAL_GEM_DEPENDENCY, ['gem_name', 'depended_gem']
+
+post_process do
+  results = CountProcessedRecords.call(relational_responses_db, config.RELATIONAL_GEM_DEPENDENCY)
+  puts "Total processed records: #{results}."
+end

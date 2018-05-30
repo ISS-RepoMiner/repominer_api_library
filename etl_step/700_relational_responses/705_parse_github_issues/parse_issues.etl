@@ -1,0 +1,25 @@
+require_relative "#{Dir.getwd}/etl_step/700_relational_responses/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+get_raw_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_RAW_RESPONSES)
+
+relational_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.RELATIONL_RESPONSES)
+
+patch_error_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.PATCH_ERROR_RESPONSES)
+
+source ReadRecordsFromMultipleDB, [get_raw_responses_db, patch_error_responses_db], 'repos_raw_responses_issues'
+
+transform CheckStatus
+
+transform CheckBody
+
+transform ProcessIssues
+
+destination SaveRecordToDBUnique, relational_responses_db, config.RELATIONAL_ISSUES, ['id']
+
+post_process do
+  results = CountProcessedRecords.call(relational_responses_db, config.RELATIONAL_ISSUES)
+  puts "Total processed records: #{results}."
+end

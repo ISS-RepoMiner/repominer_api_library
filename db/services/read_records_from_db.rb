@@ -12,5 +12,4 @@ class ReadRecordsFromDB
       yield row.dup
     end
   end
-
 end

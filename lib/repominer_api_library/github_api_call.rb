@@ -16,20 +16,14 @@ module ApiCall
       @update_time = update_time
     end
 
-    # Input url and params and call api
-    def general_call(url, req_params)
-      api_endpoint = url
+    # get numbers of forks, stars
+    def repo_meta
+      api_endpoint = @github_base_url
+      req_params = {}
       req_params[:access_token] = @access_token
       api_call_url = generate_api_url(api_endpoint, req_params)
-      [get_call(api_call_url)]
-    end
-
-    # Input url and params and call api for more call staff
-    def general_call_pages(url, req_params)
-      api_endpoint = url
-      req_params[:access_token] = @access_token
-      req_params[:since] = @update_time if @update_time
-      call_api_pages(api_endpoint, req_params)
+      res = get_call(api_call_url)
+      [{ response: res[:response], url: res[:url] }]
     end
 
     # Get the contributors # get the total commits
@@ -38,32 +32,8 @@ module ApiCall
       req_params = {}
       req_params[:access_token] = @access_token
       api_call_url = generate_api_url(api_endpoint, req_params)
-      [get_call(api_call_url)]
-    end
-
-    # Get contributors_list url
-    def contributors_list_url
-      api_endpoint = [@github_base_url, 'contributors'].join('/')
-      req_params = {}
-      req_params[:access_token] = @access_token
-      [generate_api_url(api_endpoint, req_params)]
-    end
-
-    # get numbers of forks, stars
-    def repo_meta
-      api_endpoint = @github_base_url
-      req_params = {}
-      req_params[:access_token] = @access_token
-      api_call_url = generate_api_url(api_endpoint, req_params)
-      [get_call(api_call_url)]
-    end
-
-    # get repo_meta url
-    def repo_meta_url
-      api_endpoint = @github_base_url
-      req_params = {}
-      req_params[:access_token] = @access_token
-      [generate_api_url(api_endpoint, req_params)]
+      res = get_call(api_call_url)
+      [{ response: res[:response], url: res[:url] }]
     end
 
     # get commits history
@@ -73,15 +43,6 @@ module ApiCall
       req_params[:access_token] = @access_token
       req_params[:since] = @update_time if @update_time
       call_api_pages(api_endpoint, req_params)
-    end
-
-    # get commits url
-    def commits_url
-      api_endpoint = [@github_base_url, 'commits'].join('/')
-      req_params = {}
-      req_params[:access_token] = @access_token
-      req_params[:since] = @update_time if @update_time
-      call_api_pages_url(api_endpoint, req_params)
     end
 
     # get total number of
@@ -94,50 +55,42 @@ module ApiCall
       call_api_pages(api_endpoint, req_params)
     end
 
-    # get issues url
-    def issues_url
-      api_endpoint = [@github_base_url, 'issues'].join('/')
+    # get total number of forks
+    def forks
+      api_endpoint = [@github_base_url, 'forks'].join('/')
       req_params = {}
       req_params[:access_token] = @access_token
       req_params[:since] = @update_time if @update_time
-      req_params[:state] = 'all'
-      call_api_pages_url(api_endpoint, req_params)
+      call_api_pages(api_endpoint, req_params)
+    end
+
+    # get total number of stargazers
+    def stargazers
+      api_endpoint = [@github_base_url, 'stargazers'].join('/')
+      req_params = {}
+      req_params[:access_token] = @access_token
+      req_params[:since] = @update_time if @update_time
+      call_api_pages(api_endpoint, req_params)
+    end
+
+    # get total number of forks
+    def subscribers
+      api_endpoint = [@github_base_url, 'subscribers'].join('/')
+      req_params = {}
+      req_params[:access_token] = @access_token
+      req_params[:since] = @update_time if @update_time
+      call_api_pages(api_endpoint, req_params)
     end
 
     private
 
     def get_call(url)
-      HTTP.get(url, headers: { 'User-Agent' => @user_agent })
-    end
-
-    def merge_url(url)
-      @github_base_url + url + "access_token=#{@access_token}"
-    end
-
-    def call_api_pages(api_endpoint, req_params)
-      fetch_hist = []
-      req_params[:page] = 1
-      loop do
-        api_call_url = generate_api_url(api_endpoint, req_params)
-        fetch = get_call(api_call_url)
-        break if no_more_pages(fetch)
-        fetch_hist << fetch
-        req_params[:page] += 1
+      r = HTTP.get(url, headers: { 'User-Agent' => @user_agent })
+      if r.code == 301
+        r = HTTP.get(URI.parse(r.headers['location']), headers: { 'User-Agent' => @user_agent })
+        url = r.headers['location']
       end
-      fetch_hist
-    end
-
-    def call_api_pages_url(api_endpoint, req_params)
-      fetch_url = []
-      req_params[:page] = 1
-      loop do
-        api_call_url = generate_api_url(api_endpoint, req_params)
-        fetch = get_call(api_call_url)
-        break if no_more_pages(fetch)
-        fetch_url << api_call_url
-        req_params[:page] += 1
-      end
-      fetch_url
+      { response: r, url: url }
     end
 
     def generate_api_url(url, req_params)
@@ -145,7 +98,23 @@ module ApiCall
       [url, req_attach].join('?')
     end
 
+    def call_api_pages(api_endpoint, req_params)
+      fetch_hist = []
+      req_params[:page] = 1
+      loop do
+        # api_call_url = [api_endpoint,'&page=' ,page].join
+        api_call_url = generate_api_url(api_endpoint, req_params)
+        fetch = get_call(api_call_url)
+        fetch_hist << { response: fetch[:response], url: fetch[:url] }
+        break if no_more_pages(fetch)
+        req_params[:page] += 1
+      end
+      fetch_hist
+    end
+
     def no_more_pages(fetch)
+      fetch = fetch[:response]
+      return true if fetch.code != 200
       return true unless fetch
       return true if fetch['message'] == 'Not Found'
       return true if fetch.parse.count.zero?

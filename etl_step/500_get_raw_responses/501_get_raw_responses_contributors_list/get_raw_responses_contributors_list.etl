@@ -1,0 +1,21 @@
+require_relative "#{Dir.getwd}/etl_step/500_get_raw_responses/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+match_github_list_db = ConnectToDB.call(config.DB_TYPE, config, config.MATCH_GITHUB_LIST)
+
+get_raw_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_RAW_RESPONSES)
+
+source ReadRecordsFromKIBAJOB, match_github_list_db, 'repo_list'
+
+transform CheckNil
+
+transform CallGithubApi, 'contributors_list', config
+
+destination SaveRecordToDB, get_raw_responses_db, config.RESPONSES_CONTRIBUTORS_LIST
+
+post_process do
+  results = CountProcessedRecords.call(get_raw_responses_db, config.RESPONSES_CONTRIBUTORS_LIST)
+  puts "Total processed records: #{results}."
+end

@@ -1,0 +1,21 @@
+require_relative "#{Dir.getwd}/etl_step/300_parse_basic_info/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+gem_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_BASIC_INFO)
+
+parse_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.PARSE_BASIC_INFO)
+
+source ReadRecordsFromDB, gem_basic_info_db, 'gem_basic_info'
+
+transform CheckStatus
+
+transform ParseDependencies, 'runtime'
+
+destination SaveRecordToDB, parse_basic_info_db, 'runtime_dependencies'
+
+post_process do
+  results = CountProcessedRecords.call(parse_basic_info_db, 'runtime_dependencies')
+  puts "Total processed records: #{results}."
+end

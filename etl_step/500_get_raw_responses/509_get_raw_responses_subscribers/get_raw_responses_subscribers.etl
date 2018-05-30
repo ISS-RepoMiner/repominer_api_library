@@ -1,0 +1,25 @@
+require_relative "#{Dir.getwd}/etl_step/500_get_raw_responses/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+get_raw_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_RAW_RESPONSES)
+
+source ReadRecordsFromKIBAJOB, get_raw_responses_db, config.RESPONSES_META
+
+# transform CheckStatus
+
+transform CheckNil
+
+# Parse out the api call url
+transform GetUrlFromRow, 'subscribers_url'
+
+# Call the api
+transform CallGithubApiByUrl, config
+
+destination SaveRecordToDB, get_raw_responses_db, config.RESPONSES_SUBSCRIBERS
+
+post_process do
+  results = CountProcessedRecords.call(get_raw_responses_db, config.RESPONSES_SUBSCRIBERS)
+  puts "Total processed records: #{results}."
+end

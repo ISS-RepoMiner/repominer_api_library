@@ -1,0 +1,15 @@
+require_relative "#{Dir.getwd}/etl_step/100_get_gem_list/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+gem_list_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_LIST)
+
+source GetGemList
+
+destination SaveRecordToDB, gem_list_db, 'gem_list'
+
+post_process do
+  results = CountProcessedRecords.call(gem_list_db, 'gem_list')
+  puts "Total processed records: #{results}."
+end

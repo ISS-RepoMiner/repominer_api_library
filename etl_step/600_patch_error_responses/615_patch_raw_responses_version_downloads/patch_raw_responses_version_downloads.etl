@@ -1,0 +1,24 @@
+require_relative "#{Dir.getwd}/etl_step/500_get_raw_responses/helpers/init.rb"
+require_relative "#{Dir.getwd}/etl_step/600_patch_error_responses/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+match_github_list_db = ConnectToDB.call(config.DB_TYPE, config, config.MATCH_GITHUB_LIST)
+
+patch_error_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.PATCH_ERROR_RESPONSES)
+
+source ReadRecordsFromKIBAJOB, match_github_list_db, 'repo_list'
+
+transform CheckNil
+
+transform CatchDotGit
+
+transform CallRubyGemsApi, 'versions'
+
+destination SaveRecordToDB, patch_error_responses_db, config.RESPONSES_VERSION_DOWNLOADS
+
+post_process do
+  results = CountProcessedRecords.call(patch_error_responses_db, config.RESPONSES_VERSION_DOWNLOADS)
+  puts "Total processed records: #{results}."
+end

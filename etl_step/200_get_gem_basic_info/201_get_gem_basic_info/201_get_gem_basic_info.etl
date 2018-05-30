@@ -1,0 +1,19 @@
+require_relative "#{Dir.getwd}/etl_step/200_get_gem_basic_info/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+gem_list_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_LIST)
+
+gem_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_BASIC_INFO)
+
+source ReadRecordsFromDB, gem_list_db, 'gem_list'
+
+transform CallRubyGemsApi
+
+destination SaveRecordToDB, gem_basic_info_db, 'gem_basic_info'
+
+post_process do
+  results = CountProcessedRecords.call(gem_basic_info_db, 'gem_basic_info')
+  puts "Total processed records: #{results}."
+end

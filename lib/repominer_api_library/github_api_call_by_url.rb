@@ -2,8 +2,8 @@ require 'http'
 module ApiCall
   # Calling the endpoint to get the data
   class GithubApiCallByUrl
-    def initialize(callurl, user_agent, access_token)
-      @callurl = callurl
+    def initialize(api_url, user_agent, access_token)
+      @api_url = api_url
       @user_agent = user_agent
       @access_token = access_token
       @update_time = nil
@@ -14,34 +14,23 @@ module ApiCall
     end
 
     # Input url and params and call api
-    def general_call(req_params)
-      api_endpoint = @callurl
+    def general_call
+      req_params = {}
+      api_endpoint = @api_url
       req_params[:access_token] = @access_token
-      api_call_url = generate_api_url(api_endpoint, req_params)
-      [get_call(api_call_url)]
+      #api_call_url = generate_api_url(api_endpoint, req_params)
+      call_api_pages(api_endpoint, req_params)
     end
 
-    def general_call_url(req_params)
-      api_endpoint = @callurl
-      req_params[:access_token] = @access_token
-      generate_api_url(api_endpoint, req_params)
-    end
-
-    # Input url and params and call api for more call staff
-    # def general_call_pages(url, req_params)
-    #   api_endpoint = url
-    #   req_params[:access_token] = @access_token
-    #   req_params[:since] = @update_time if @update_time
-    #   call_api_pages(api_endpoint, req_params)
-    # end
     private
 
     def get_call(url)
-      HTTP.get(url, headers: { 'User-Agent' => @user_agent })
-    end
-
-    def merge_url(url)
-      @github_base_url + url + "access_token=#{@access_token}"
+      r = HTTP.get(url, headers: { 'User-Agent' => @user_agent })
+      if r.code == 301
+        r = HTTP.get(URI.parse(r.headers['location']), headers: { 'User-Agent' => @user_agent })
+        url = r.headers['location']
+      end
+      { response: r, url: url }
     end
 
     def call_api_pages(api_endpoint, req_params)
@@ -50,24 +39,11 @@ module ApiCall
       loop do
         api_call_url = generate_api_url(api_endpoint, req_params)
         fetch = get_call(api_call_url)
+        fetch_hist << { response: fetch[:response], url: fetch[:url] }
         break if no_more_pages(fetch)
-        fetch_hist << fetch
         req_params[:page] += 1
       end
       fetch_hist
-    end
-
-    def call_api_pages_url(api_endpoint, req_params)
-      fetch_url = []
-      req_params[:page] = 1
-      loop do
-        api_call_url = generate_api_url(api_endpoint, req_params)
-        fetch = get_call(api_call_url)
-        break if no_more_pages(fetch)
-        fetch_url << api_call_url
-        req_params[:page] += 1
-      end
-      fetch_url
     end
 
     def generate_api_url(url, req_params)
@@ -76,6 +52,8 @@ module ApiCall
     end
 
     def no_more_pages(fetch)
+      fetch = fetch[:response]
+      return true if fetch.code != 200
       return true unless fetch
       return true if fetch['message'] == 'Not Found'
       return true if fetch.parse.count.zero?

@@ -1,6 +1,6 @@
 require 'http'
 module ApiCall
-  # Calling the endpoint to get the data
+  # Calling the BestGem endpoint to get the data
   class BestGemsApiCall
     def initialize(gem_name)
       url = 'http://bestgems.org/api/v1/gems'
@@ -8,20 +8,30 @@ module ApiCall
       @best_gem_base_api_url = [url, @gem_name].join('/')
     end
 
-    # get the commit activity in last year
+    # get the total downloads
     def total_download_trend
       api_endpoint = [@best_gem_base_api_url, 'total_downloads.json'].join('/')
-      [HTTP.get(api_endpoint)]
+      res = get_call(api_endpoint)
+      { response: res, url: res.headers['location'] }
     end
 
     def url(route)
       [@best_gem_base_api_url, "#{route}.json"].join('/')
     end
 
-    # get the commit activity in last year
+    # get the daily downloads
     def daily_download_trend
       api_endpoint = [@best_gem_base_api_url, 'daily_downloads.json'].join('/')
-      [HTTP.get(api_endpoint)]
+      res = get_call(api_endpoint)
+      { response: res, url: res.headers['location'] }
+    end
+
+    def get_call(url)
+      r = HTTP.get(url, headers: { 'User-Agent' => @user_agent })
+      if r.code == '301'
+        r = HTTP.get(URI.parse(r.headers['location']), headers: { 'User-Agent' => @user_agent })
+      end
+      r
     end
   end
 end
