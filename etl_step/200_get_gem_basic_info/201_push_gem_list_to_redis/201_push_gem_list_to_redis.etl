@@ -1,0 +1,20 @@
+require_relative "#{Dir.getwd}/etl_step/400_match_github_list/helpers/init.rb"
+extend Econfig::Shortcut
+Econfig.env = 'development'
+Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
+
+gem_list_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_LIST)
+
+redis_queue = ConnectToRedisQueue.call('gem_list_queue', 'gem_list_process', config)
+
+source ReadRecordsFromDB, gem_list_db, 'gem_list'
+
+transform do |row|
+  row[:gem_name]
+end
+
+destination PushRecordToRedis, redis_queue
+
+post_process do
+  puts "Total processed records: #{redis_queue.length}."
+end

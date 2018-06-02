@@ -7,7 +7,7 @@ gem_list_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_LIST)
 
 gem_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_BASIC_INFO)
 
-source ReadRecordsFromDB, gem_list_db, 'gem_list'
+source ReadRecordsFromKIBAJOB, gem_list_db, 'gem_list'
 
 transform CallRubyGemsApi
 

@@ -144,9 +144,15 @@ namespace :etl do
     sh 'kiba etl_step/100_get_gem_list/101_get_gem_list/101_get_gem_list.etl'
   end
 
-  desc 'Runs ETL to get Gem Basic Information'
+  desc 'Runs ETL to get coressponsed gem list'
   task :step2_get_gem_basic_info => [:config] do
-    sh 'kiba etl_step/200_get_gem_basic_info/201_get_gem_basic_info/201_get_gem_basic_info.etl'
+    require_relative "#{Dir.getwd}/db/services/connect_to_redis_queue.rb"
+    redis_queue = ConnectToRedisQueue.call('gem_list_queue', 'gem_list_process', config)
+    while gem_name = redis_queue.pop
+      complete_bool = task_200(gem_name)
+      redis_queue.commit if complete_bool
+      break if quit?
+    end
   end
 
   desc 'Runs ETL to parse Gem Basic Information'
@@ -295,6 +301,15 @@ end
 
 
 ###################################################################################
+def task_200(job)
+  if job.nil?
+    false
+  else
+    sh "KIBA_JOB=\"#{job}\" kiba etl_step/200_get_gem_basic_info/202_get_gem_basic_info/202_get_gem_basic_info.etl"
+    true
+  end
+end
+
 def task_500(job)
   if job.nil?
     false
