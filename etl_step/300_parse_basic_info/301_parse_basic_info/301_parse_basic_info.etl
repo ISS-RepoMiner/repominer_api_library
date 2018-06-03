@@ -7,13 +7,13 @@ gem_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_GEM_BASI
 
 parse_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.PARSE_BASIC_INFO)
 
-source ReadRecordsFromDB, gem_basic_info_db, 'basic_info'
+source ReadRecordsFromDB, gem_basic_info_db, 'gem_basic_info'
 
 transform CheckStatus
 
 transform ParseBasicInfo
 
-destination SaveRecordToDB, parse_basic_info_db, 'basic_info'
+destination SaveRecordToDBUnique, parse_basic_info_db, 'basic_info', ['gem_name']
 
 post_process do
   results = CountProcessedRecords.call(parse_basic_info_db, 'basic_info')

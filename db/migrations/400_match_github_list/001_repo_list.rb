@@ -9,6 +9,7 @@ Sequel.migration do
       String :gem_name
       String :repo_name
       String :repo_user
+      primary_key [:gem_name, :repo_name], name: 'repo_list_id'
     end
   end
 end

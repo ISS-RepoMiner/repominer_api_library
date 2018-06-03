@@ -9,7 +9,7 @@ source ReadRecordsFromDB, parse_basic_info_db, 'basic_info'
 
 transform ParseGithubList
 
-destination SaveRecordToDB, parse_basic_info_db, 'repo_list'
+destination SaveRecordToDBUnique, parse_basic_info_db, 'repo_list', ['gem_name', 'repo_name']
 
 post_process do
   results = CountProcessedRecords.call(parse_basic_info_db, 'repo_list')

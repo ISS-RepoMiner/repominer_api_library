@@ -157,13 +157,15 @@ namespace :etl do
 
   desc 'Runs ETL to parse Gem Basic Information'
   task :step3_parse_basic_info => [:config] do
-    # sh 'kiba etl_step/300_parse_basic_info/301_parse_basic_info/301_parse_basic_info.etl'
-    # sh 'kiba etl_step/300_parse_basic_info/302_parse_runtime_dependencies/302_parse_runtime_dependencies.etl'
-    # sh 'kiba etl_step/300_parse_basic_info/303_parse_deve_dependencies/303_parse_deve_dependencies.etl'
+    sh 'kiba etl_step/300_parse_basic_info/301_parse_basic_info/301_parse_basic_info.etl'
     sh 'kiba etl_step/300_parse_basic_info/304_parse_github_list/304_parse_github_list.etl'
-    # sh 'kiba etl_step/300_parse_basic_info/305_merge_runtime_dependencies/305_merge_runtime_dependencies.etl'
-    # sh 'kiba etl_step/300_parse_basic_info/306_merge_deve_dependencies/306_merge_deve_dependencies.etl'
   end
+
+  desc 'Runs ETL to parse Gem Basic Information'
+  task :step3_parse_depedency => [:config] do
+    sh 'kiba etl_step/300_parse_basic_info/302_parse_runtime_dependencies/302_parse_runtime_dependencies.etl'
+  end
+
 
   desc 'Runs ETL to push repo_list into redis_queue'
   task :step4_push_github_list_to_redis => [:config] do
@@ -172,22 +174,9 @@ namespace :etl do
 
 
   desc 'Runs ETL to get coressponsed gem list'
-  task :step5_get_raw_responses => [:config] do
-    sh 'kiba etl_step/500_get_raw_responses/501_get_raw_responses_contributors_list/get_raw_responses_contributors_list.etl'
-    sh 'kiba etl_step/500_get_raw_responses/502_get_raw_responses_repo_meta/get_raw_responses_repo_meta.etl'
-    sh 'kiba etl_step/500_get_raw_responses/503_get_raw_responses_commits/get_raw_responses_commits.etl'
-    sh 'kiba etl_step/500_get_raw_responses/504_get_raw_responses_issues/get_raw_responses_issues.etl'
-    sh 'kiba etl_step/500_get_raw_responses/505_get_raw_responses_total_download_trend/get_raw_responses_total_download_trend.etl'
-    sh 'kiba etl_step/500_get_raw_responses/506_get_raw_responses_daily_download_trend/get_raw_responses_daily_download_trend.etl'
-    sh 'kiba etl_step/500_get_raw_responses/507_get_raw_responses_version_downloads/get_raw_responses_version_downloads.etl'
-    sh 'kiba etl_step/500_get_raw_responses/508_get_raw_responses_stargazers/get_raw_responses_stargazers.etl'
-    sh 'kiba etl_step/500_get_raw_responses/509_get_raw_responses_subscribers/get_raw_responses_subscribers.etl'
-  end
-
-  desc 'Runs ETL to get coressponsed gem list'
-  task :step5_concurrence_download do
+  task :step5_concurrence_download => [:config] do
     require_relative "#{Dir.getwd}/db/services/connect_to_redis_queue.rb"
-    redis_queue = ConnectToRedisQueue.call
+    redis_queue = ConnectToRedisQueue.call('repo_list_queue', 'repo_list_process', config)
     while row = eval(redis_queue.pop)
       gem_name = row[:gem_name]
       complete_bool = task_500(gem_name)
@@ -314,8 +303,7 @@ def task_500(job)
   if job.nil?
     false
   else
-    sh "KIBA_JOB=\"#{job}\""
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/500_get_raw_responses/501_get_raw_responses_contributors_list/get_raw_responses_contributors_list.etl"
+    # sh "KIBA_JOB=\"#{job}\" kiba etl_step/500_get_raw_responses/501_get_raw_responses_contributors_list/get_raw_responses_contributors_list.etl"
     sh "KIBA_JOB=\"#{job}\" kiba etl_step/500_get_raw_responses/502_get_raw_responses_repo_meta/get_raw_responses_repo_meta.etl"
     sh "KIBA_JOB=\"#{job}\" kiba etl_step/500_get_raw_responses/503_get_raw_responses_commits/get_raw_responses_commits.etl"
     sh "KIBA_JOB=\"#{job}\" kiba etl_step/500_get_raw_responses/504_get_raw_responses_issues/get_raw_responses_issues.etl"

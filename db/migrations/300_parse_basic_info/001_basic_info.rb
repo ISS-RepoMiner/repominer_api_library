@@ -5,8 +5,7 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:basic_info) do
-      primary_key :id
-      String :gem_name
+      String :gem_name, primary_key: true
       String :update_time
       Integer :downloads
       String :version

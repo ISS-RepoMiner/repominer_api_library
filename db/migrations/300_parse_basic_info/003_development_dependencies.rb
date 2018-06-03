@@ -5,10 +5,10 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:development_dependencies) do
-      primary_key :id
       String :gem_name
       String :depended_gem
       String :requirements
+      primary_key [:gem_name, :depended_gem], name: 'development_dependencies_id'
     end
   end
 end

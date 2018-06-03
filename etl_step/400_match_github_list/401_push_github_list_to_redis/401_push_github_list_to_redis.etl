@@ -5,9 +5,9 @@ Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
 
 parse_basic_info_db = ConnectToDB.call(config.DB_TYPE, config, config.PARSE_BASIC_INFO)
 
-redis_queue = ConnectToRedisQueue.call
+redis_queue = ConnectToRedisQueue.call('repo_list_queue', 'repo_list_process', config)
 
-source ReadRecordsFromDB, parse_basic_info_db, 'repo_list_tmp'
+source ReadRecordsFromDB, parse_basic_info_db, 'repo_list'
 
 destination PushRecordToRedis, redis_queue
 

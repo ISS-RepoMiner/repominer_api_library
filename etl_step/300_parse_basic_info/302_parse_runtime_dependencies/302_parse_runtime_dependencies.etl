@@ -13,7 +13,7 @@ transform CheckStatus
 
 transform ParseDependencies, 'runtime'
 
-destination SaveRecordToDB, parse_basic_info_db, 'runtime_dependencies'
+destination SaveRecordToDBUnique, parse_basic_info_db, 'runtime_dependencies', ['gem_name', 'depended_gem']
 
 post_process do
   results = CountProcessedRecords.call(parse_basic_info_db, 'runtime_dependencies')
