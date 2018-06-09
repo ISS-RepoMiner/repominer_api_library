@@ -205,46 +205,19 @@ namespace :etl do
     task_500(gem_name)
   end
 
+  desc 'Runs ETL to push repo_list into redis_queue'
+  task :step6_patch_missing_records_to_queue => [:config] do
+    sh 'kiba etl_step/600_patch_error_responses/601_patch_raw_responses_repo_meta/patch_raw_responses_repo_meta.etl'
+    sh 'kiba etl_step/600_patch_error_responses/602_patch_raw_responses_commits/patch_raw_responses_commits.etl'
+    sh 'kiba etl_step/600_patch_error_responses/603_patch_raw_responses_issues/patch_raw_responses_issues.etl'
+    sh 'kiba etl_step/600_patch_error_responses/604_patch_raw_responses_total_download_trend/patch_raw_responses_total_download_trend.etl'
+    sh 'kiba etl_step/600_patch_error_responses/605_patch_raw_responses_daily_download_trend/patch_raw_responses_daily_download_trend.etl'
+    sh 'kiba etl_step/600_patch_error_responses/606_patch_raw_responses_version_downloads/patch_raw_responses_version_downloads.etl'
+    sh 'kiba etl_step/600_patch_error_responses/607_patch_raw_responses_stargazers/patch_raw_responses_stargazers.etl'
+    sh 'kiba etl_step/600_patch_error_responses/608_patch_raw_responses_subscribers/patch_raw_responses_subscribers.etl'
+    sh 'kiba etl_step/600_patch_error_responses/609_patch_raw_responses_forks/patch_raw_responses_forks.etl'
+  end
 
-    desc 'Runs ETL to push repo_list into redis_queue'
-    task :step6_push_error_records_to_queue => [:config] do
-      sh 'kiba etl_step/600_patch_error_responses/601_push_error_record_to_queue/push_error_record_to_queue.etl'
-    end
-
-    desc 'Runs ETL to push repo_list into redis_queue'
-    task :step6_push_missing_records_to_queue => [:config] do
-      sh 'kiba etl_step/600_patch_error_responses/610_push_missing_record_to_queue/push_missing_record_to_queue.etl'
-    end
-
-    desc 'Runs ETL to get coressponsed gem list'
-    task :step6_patch_error_responses do
-      require_relative "#{Dir.getwd}/db/services/connect_to_redis_queue.rb"
-      patch_error_queue = ConnectToPatchErrorQueue.call
-      while row = eval(patch_error_queue.pop)
-        gem_name = row[:gem_name]
-        complete_bool = task_601(gem_name)
-        patch_error_queue.commit if complete_bool
-        break if quit?
-      end
-    end
-
-    desc 'Runs ETL to get coressponsed gem list'
-    task :step6_patch_missing_responses do
-      require_relative "#{Dir.getwd}/db/services/connect_to_redis_queue.rb"
-      patch_error_queue = ConnectToPatchErrorQueue.call
-      while gem_name = patch_error_queue.pop
-        complete_bool = task_602(gem_name)
-        patch_error_queue.commit if complete_bool
-        break if quit?
-      end
-    end
-
-    desc 'Runs ETL to get coressponsed gem list'
-    task :step6_patch_missing_responses_for_one_record do
-      require_relative "#{Dir.getwd}/db/services/connect_to_redis_queue.rb"
-      gem_name = ENV['GEM_NAME']
-      task_602(gem_name)
-    end
 
   desc 'Runs ETL to get coressponsed gem list'
   task :step7_relational_responses => [:config] do
@@ -329,22 +302,6 @@ def task_601(job)
     sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/607_patch_raw_responses_stargazers/patch_raw_responses_stargazers.etl"
     sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/608_patch_raw_responses_subscribers/patch_raw_responses_subscribers.etl"
     sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/609_patch_raw_responses_forks/patch_raw_responses_forks.etl"
-    true
-  end
-end
-
-def task_602(job)
-  if job.nil?
-    false
-  else
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/611_patch_raw_responses_repo_meta/patch_raw_responses_repo_meta.etl"
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/612_patch_raw_responses_commits/patch_raw_responses_commits.etl"
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/613_patch_raw_responses_issues/patch_raw_responses_issues.etl"
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/614_patch_raw_responses_daily_download_trend/patch_raw_responses_daily_download_trend.etl"
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/615_patch_raw_responses_version_downloads/patch_raw_responses_version_downloads.etl"
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/616_patch_raw_responses_stargazers/patch_raw_responses_stargazers.etl"
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/617_patch_raw_responses_subscribers/patch_raw_responses_subscribers.etl"
-    sh "KIBA_JOB=\"#{job}\" kiba etl_step/600_patch_error_responses/618_patch_raw_responses_forks/patch_raw_responses_forks.etl"
     true
   end
 end

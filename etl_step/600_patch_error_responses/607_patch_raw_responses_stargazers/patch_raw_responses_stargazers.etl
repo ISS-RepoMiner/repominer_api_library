@@ -5,7 +5,7 @@ Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
 
 get_raw_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_RAW_RESPONSES)
 
-source ReadRecordsFromKIBAJOB, get_raw_responses_db, config.RESPONSES_META
+source ReadErrorRecordsFromDB, get_raw_responses_db, config.RESPONSES_STARGAZERS, parse_basic_info_db, 'repo_list'
 
 # transform CheckStatus
 
