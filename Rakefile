@@ -77,9 +77,9 @@ namespace :db do
   end
 
   desc 'Reset migrations (full rollback and migration)'
-  task :reset_redis_queue => [:config] do
+  task :reset_400_redis_queue => [:config] do
     require_relative "#{Dir.getwd}/db/services/connect_to_redis_queue.rb"
-    redis_queue = ConnectToRedisQueue.call
+    redis_queue = ConnectToRedisQueue.call('repo_list_queue', 'repo_list_process', config)
     redis_queue.clear
   end
 

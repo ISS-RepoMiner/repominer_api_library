@@ -1,12 +1,9 @@
 require_relative "#{Dir.getwd}/etl_step/500_get_raw_responses/helpers/init.rb"
-require_relative "#{Dir.getwd}/etl_step/600_patch_error_responses/helpers/init.rb"
 extend Econfig::Shortcut
 Econfig.env = 'development'
 Econfig.root = File.expand_path('../../../../', File.expand_path(__FILE__))
 
 get_raw_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.GET_RAW_RESPONSES)
-
-patch_error_responses_db = ConnectToDB.call(config.DB_TYPE, config, config.PATCH_ERROR_RESPONSES)
 
 source ReadRecordsFromKIBAJOB, get_raw_responses_db, config.RESPONSES_META
 
@@ -14,17 +11,15 @@ source ReadRecordsFromKIBAJOB, get_raw_responses_db, config.RESPONSES_META
 
 transform CheckNil
 
-transform CatchDotGit
-
 # Parse out the api call url
-transform GetUrlFromRow, 'stargazers_url'
+transform GetUrlFromRow, 'subscribers_url'
 
 # Call the api
 transform CallGithubApiByUrl, config
 
-destination SaveRecordToDB, patch_error_responses_db, config.RESPONSES_STARGAZERS
+destination SaveRecordToDB, get_raw_responses_db, config.RESPONSES_SUBSCRIBERS
 
 post_process do
-  results = CountProcessedRecords.call(patch_error_responses_db, config.RESPONSES_STARGAZERS)
+  results = CountProcessedRecords.call(get_raw_responses_db, config.RESPONSES_SUBSCRIBERS)
   puts "Total processed records: #{results}."
 end

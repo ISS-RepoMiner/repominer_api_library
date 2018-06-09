@@ -1,20 +1,18 @@
 require 'sequel'
 
 class ReadErrorRecordsFromDB
-  def initialize(db)
+  def initialize(db, table)
     @db = db
+    @table = table
   end
 
   def each
-    tables = [:repos_raw_responses_repo_meta, :repos_raw_responses_commits, :repos_raw_responses_issues, :gems_raw_responses_daily_download_trend, :gems_raw_responses_version_downloads, :repos_raw_responses_stargazers, :repos_raw_responses_subscribers, :repos_raw_responses_forks]
-    error_record = []
-    tables.map do |table|
-      @db[table].exclude(status: '200').map do |record|
-        error_record << {gem_name: record[:gem_name], repo_name: record[:repo_name]}
-      end
+    query_term = "SELECT * from " + @table + " where status != '200' AND status != '404'"
+    error_record = @db[query_term].map do |record|
+      { gem_name: record[:gem_name], repo_name: record[:repo_name] }
     end
 
-    error_record.uniq.each do |row|
+    error_record.uniq.map do |row|
       yield row
     end
   end
