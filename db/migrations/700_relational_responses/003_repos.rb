@@ -7,7 +7,7 @@ Sequel.migration do
     create_table(:repos) do
       Integer :id, primary_key: true
       String :repo_name
-      foreign_key :rubygem_id, :rubygems, type: 'text'
+      foreign_key :rubygem_id, :rubygems, type: 'text', null: true
       String :full_name
       foreign_key :owner_id, :profiles, type: 'text'
       Bool :private

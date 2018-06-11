@@ -6,7 +6,7 @@ Sequel.migration do
   change do
     create_table(:rubygems) do
       String :id, primary_key: true
-      String :gem_name
+      foreign_key :gem_id, :repos, null: true
       Integer :downloads
       String :version
       Integer :version_downloads

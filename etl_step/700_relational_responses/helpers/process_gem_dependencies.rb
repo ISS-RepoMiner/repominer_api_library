@@ -18,7 +18,6 @@ class ProcessGemDependencies
 
   def get_gem_id(row, col_name)
     gem = Rubygem.find(gem_name: row[col_name])
-    puts gem.nil? ? 'nil' : gem[:id]
     gem.nil? ? nil : gem[:id]
   end
 end
