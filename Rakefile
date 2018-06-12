@@ -221,25 +221,23 @@ namespace :etl do
 
   desc 'Runs ETL to get coressponsed gem list'
   task :step7_relational_responses => [:config] do
-    # sh 'kiba etl_step/700_relational_responses/701_parse_rubygem_gems/parse_gems.etl'
-    #
-    # sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_repo_owner.etl'
-    # sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_committer_author.etl'
-    # sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_issuer.etl'
-    # sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_forker.etl'
-    # sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_stargazer.etl'
-    # sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_subscriber.etl'
-    #
-    # sh 'kiba etl_step/700_relational_responses/703_parse_github_repos/parse_repo_meta.etl'
-    # sh 'kiba etl_step/700_relational_responses/704_parse_github_commits/parse_commits.etl'
-    # sh 'kiba etl_step/700_relational_responses/705_parse_github_issues/parse_issues.etl'
-    # sh 'kiba etl_step/700_relational_responses/706_parse_github_stargazers/parse_stargazers.etl'
-    # sh 'kiba etl_step/700_relational_responses/707_parse_github_subscribers/parse_subscribers.etl'
-    # sh 'kiba etl_step/700_relational_responses/708_parse_github_forks/parse_fork.etl'
-    # sh 'kiba etl_step/700_relational_responses/709_parse_bestgem_downloads/parse_download.etl'
-    # sh 'kiba etl_step/700_relational_responses/710_parse_rubygem_gem_versions/parse_gem_version.etl'
-    sh 'kiba etl_step/700_relational_responses/711_parse_rubygem_gem_dependency/parse_rubygem_gem_dependency.etl'
-
+    sh 'kiba etl_step/700_relational_responses/701_parse_rubygem_gems/parse_gems.etl'
+    sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_committer_author.etl'
+    sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_forker.etl'
+    sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_issuer.etl'
+    sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_repo_owner.etl'
+    sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_stargazer.etl'
+    sh 'kiba etl_step/700_relational_responses/702_parse_github_profiles/parse_subscriber.etl'
+    sh 'kiba etl_step/700_relational_responses/703_parse_github_repos/parse_repo_meta.etl'
+    sh 'kiba etl_step/700_relational_responses/704_parse_rubygem_repo_relation/parse_rubygem_repo_relation.etl'
+    sh 'kiba etl_step/700_relational_responses/705_parse_github_commits/parse_commits.etl'
+    sh 'kiba etl_step/700_relational_responses/706_parse_github_issues/parse_issues.etl'
+    sh 'kiba etl_step/700_relational_responses/707_parse_github_stargazers/parse_stargazers.etl'
+    sh 'kiba etl_step/700_relational_responses/708_parse_github_subscribers/parse_subscribers.etl'
+    sh 'kiba etl_step/700_relational_responses/709_parse_github_forks/parse_fork.etl'
+    sh 'kiba etl_step/700_relational_responses/710_parse_bestgem_downloads/parse_download.etl'
+    sh 'kiba etl_step/700_relational_responses/711_parse_rubygem_gem_versions/parse_gem_version.etl'
+    sh 'kiba etl_step/700_relational_responses/712_parse_rubygem_gem_dependency/parse_rubygem_gem_dependency.etl'
   end
 
   desc 'Runs ETL to get gathering all features'
