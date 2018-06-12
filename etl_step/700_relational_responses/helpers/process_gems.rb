@@ -8,7 +8,6 @@ class ProcessGems
 
   def parse_gem(row)
     { id: row[:sha],
-      gem_name: row[:gem_name],
       downloads: row[:downloads],
       version: row[:version],
       version_downloads: row[:version_downloads],
