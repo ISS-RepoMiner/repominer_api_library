@@ -6,7 +6,7 @@ source "https://rubygems.org" do
  gem 'kiba'
  gem 'pg'
  gem 'rake'
- gem 'rbnacl'
+ gem 'rbnacl-libsodium'
  gem 'redis-queue'
  gem 'sequel'
 end

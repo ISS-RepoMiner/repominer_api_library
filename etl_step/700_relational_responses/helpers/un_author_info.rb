@@ -7,7 +7,7 @@ class UnAuthorInfo
 
   def hashed_author_id(commit)
     author_info = commit['commit']['author'].to_s
-    byte_info = RbNaCl::Hash.blake2b(author_info)
+    byte_info = rbnacl-libsodium::Hash.blake2b(author_info)
     'Author' + bin_to_hex(byte_info)
   end
 

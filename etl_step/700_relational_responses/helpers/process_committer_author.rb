@@ -1,4 +1,4 @@
-require 'rbnacl'
+require 'rbnacl-libsodium'
 # Parse raw response to rdb
 class ProcessCommitterAuthor
   def initialize; end
